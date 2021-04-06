@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>San Jose Story Map</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+    <link href="css/map.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+    <div id='map'>
+        <!-- this is where the map is populated by javascript -->
+    </div>
+    <div class='mapSidebar pad2'>
+        <!-- added sidebar https://docs.mapbox.com/help/tutorials/create-interactive-hover-effects-with-mapbox-gl-js/#add-the-earthquake-source -->
+        <div class='heading'>
+            <h1>SJ STORY MAP</h1>
+        </div>
+        <div id='listings' class='listings'></div>
+    </div>
+
+    <!-- private key sk.eyJ1IjoiYW5nZWxhYmVsZWwiLCJhIjoiY2tmejVkYjk0MGg4ODJxcjB0bHJvaXBoMyJ9.ckcmcaZVXRj78QK5Vx5mBw -->
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiYW5nZWxhYmVsZWwiLCJhIjoiY2tmZjBiOTJ1MDYxcTJ4bGFzaHdyOGxqMiJ9.JJKlupKeMOJml7UyPVzvKg';
+
+
+        var sanjose = [-121.8863, 37.3382];
+        //create new map
+
+        var storydata = {
+            'type': 'FeatureCollection',
+            'features': [{
+                    'type': 'Feature',
+                    'properties': {
+                        'title': 'Theatre',
+                        'description': '<strong>San Jose Hammer Theater</strong><p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><iframe src="https://www.youtube.com/embed/Y-BU7agLSY0" width="100%"height="auto"></iframe>',
+                        'icon': 'theatre'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [
+                            -121.87,
+                            37.33
+                        ]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'title': 'Bar',
+                        'description': '<strong>It is a bar</strong><p> <a href="http://www.google.com" target="_blank" title="Opens in a new window"> Hello</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>',
+                        'icon': 'bar'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [
+                            -121.875,
+                            37.33
+                        ]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'title': 'Art Gallery',
+                        'description': '<strong>SJSU</strong><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <img src ="media/artgallery.jpg"/></p>',
+                        'icon': 'art-gallery'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [
+                            -121.88,
+                            37.33
+                        ]
+                    }
+                }
+            ]
+        };
+
+        storydata.features.forEach(function(story, i) {
+            story.properties.id = i;
+        });
+
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            zoom: 12,
+            center: sanjose
+        });
+
+        map.on('load', function(e) {
+
+            // Add an image to use as a custom marker
+            map.loadImage(
+                'https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
+                function(error, image) {
+                    if (error) throw error;
+                    map.addImage('custom-marker', image);
+                    // Add a GeoJSON source with 3 points.
+                    // To load GeoJSON file = https://docs.mapbox.com/mapbox.js/example/v1.0.0/geojson-marker-from-url/
+
+                    // Add a symbol layer
+                    map.addLayer({
+                        'id': 'symbols',
+                        'type': 'symbol',
+                        'source': {
+                            'type': 'geojson',
+                            'data': storydata
+                        },
+                        'layout': {
+                            'icon-image': '{icon}-15',
+                            'icon-allow-overlap': true
+                        }
+                    });
+
+                    buildLocationList(storydata);
+                }
+            );
+
+        });
+
+
+        function buildLocationList(data) {
+            data.features.forEach(function(story, i) {
+                /**
+                 * Create a shortcut for `story.properties`,
+                 * which will be used several times below.
+                 **/
+                var prop = story.properties;
+
+                /* Add a new listing section to the sidebar. */
+                var listings = document.getElementById('listings');
+                var listing = listings.appendChild(document.createElement('div'));
+                /* Assign a unique `id` to the listing. */
+                listing.id = "listing-" + prop.id;
+                /* Assign the `item` class to each listing for styling. */
+                listing.className = 'item';
+
+                /* Add the link to the individual listing created above. */
+                var link = listing.appendChild(document.createElement('a'));
+                link.href = '#';
+                link.className = 'title';
+                link.id = "link-" + prop.id;
+                link.innerHTML = prop.title;
+
+                /* Add details to the individual listing. */
+                var details = listing.appendChild(document.createElement('div'));
+                details.innerHTML = prop.description;
+
+                /**
+                 * Listen to the element and when it is clicked, do four things:
+                 * 1. Update the `currentFeature` to the store associated with the clicked link
+                 * 2. Fly to the point
+                 * 3. Close all other popups and display popup for clicked store
+                 * 4. Highlight listing in sidebar (and remove highlight for all other listings)
+                 **/
+                link.addEventListener('click', function(e) {
+                    for (var i = 0; i < data.features.length; i++) {
+                        if (this.id === "link-" + data.features[i].properties.id) {
+                            var clickedListing = data.features[i].geometry.coordinates;
+                            flyToStore(clickedListing);
+                            createPopUp(clickedListing);
+                        }
+                    }
+                    var activeItem = document.getElementsByClassName('active');
+                    if (activeItem[0]) {
+                        activeItem[0].classList.remove('active');
+                    }
+                    this.parentNode.classList.add('active');
+                });
+            });
+        }
+
+        // Center the map on the coordinates of any clicked symbol from the 'symbols' layer.
+        map.on('click', 'symbols', function(e) {
+
+        var coordinates = e.features[0].geometry.coordinates.slice();
+        var description = e.features[0].properties.description;
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML(description)
+            .addTo(map);
+
+        map.flyTo({
+            center: e.features[0].geometry.coordinates
+        });
+        });
+
+    </script>
+
+</body>
+
+</html>

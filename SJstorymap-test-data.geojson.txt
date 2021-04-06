@@ -1,0 +1,50 @@
+{
+	"type": "FeatureCollection",
+	"features": [
+		{
+			"type": "Feature",
+			"properties": {
+				"title": "Theatre",
+				"description": "<strong>San Jose Hammer Theater<\/strong><p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<\/p><iframe src=\"https://www.youtube.com/embed/Y-BU7agLSY0\" width=\"100%\"height=\"auto\"><\/iframe>",
+				"icon": "theatre"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-121.87,
+					37.33
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"title": "Bar",
+				"description": "<strong>It is a bar<\/strong><p> <a href=\"http://www.google.com\" target=\"_blank\" title=\"Opens in a new window\"> Hello<\/a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<\/p>",
+				"icon": "bar"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-121.875,
+					37.33
+				]
+			}
+		},
+		{
+			"type": "Feature",
+			"properties": {
+				"title": "Art Gallery",
+				"description": "<strong>SJSU<\/strong><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <img src =\"media/artgallery.jpg\"/><\/p>",
+				"icon": "art-gallery"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [
+					-121.88,
+					37.33
+				]
+			}
+		}
+	]
+}

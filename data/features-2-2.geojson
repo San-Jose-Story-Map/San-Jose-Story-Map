@@ -1,0 +1,83 @@
+{
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "email": "artist1@gmail.com",
+        "video submission": "",
+        "text submission":"",
+        "url submission":"",
+        "photo submission": "https://drive.google.com/open?id=1lI-hRRA9QeiRab9FX0OHnH3xrXmJN6kd",
+        "title of work": "Artist 1 title",
+        "last name": "Artist 1 Last Name",
+        "first name": "Artist 1 First Name",
+        "Timestamp": "11/18/2020 14:40:31",
+        "hashtag": "sjstorymap",
+        "statement": "Artist 1 statement -  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+        "bio url": "http://bit.ly/sjstorymap",
+        "personal url": "http://www.angelabelle.co"
+      },
+      "geometry": {
+        "coordinates": [
+          -121.86,
+          37.33
+        ],
+        "type": "Point"
+      },
+      "id": "1bdeff5f932fb980b1d7852678f4de1b"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "email": "artist2@gmail.com",
+        "video submission": "",
+        "text submission": "Artist 2 text submission - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+        "url submission":"",
+        "photo submission": "",
+        "title of work": "Artist 2 title",
+        "last name": "Artist 2 Last Name",
+        "first name": "Artist 2 First Name",
+        "Timestamp": "11/18/2020 14:40:31",
+        "hashtag": "sjstorymap",
+        "statement": "Artist 2 statement -  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+        "bio url": "http://bit.ly/sjstorymap",
+        "personal url": "http://www.angelabelle.co"
+      },
+      "geometry": {
+        "coordinates": [
+          -121.76,
+          37.33
+        ],
+        "type": "Point"
+      },
+      "id": "1bdeff5f932fb980b1d7852678f4de1b"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "email": "artist3@gmail.com",
+        "video submission": "https://drive.google.com/open?id=1uMXBbD_gpkihGWbZEReTyKxykfsWCV5Z",
+        "text submission": "",
+        "url submission":"",
+        "photo submission": "",
+        "title of work": "Artist 3 title",
+        "last name": "Artist 3 Last Name",
+        "first name": "Artist 3 First Name",
+        "Timestamp": "11/18/2020 14:40:31",
+        "hashtag": "corona-chronicals",
+        "statement": "Artist 3 statement -  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+        "bio url": "http://bit.ly/sjstorymap",
+        "personal url": "http://www.angelabelle.co"
+      },
+      "geometry": {
+        "coordinates": [
+          -121.96,
+          37.33
+        ],
+        "type": "Point"
+      },
+      "id": "1bdeff5f932fb980b1d7852678f4de1b"
+    }
+  ],
+  "type": "FeatureCollection"
+}

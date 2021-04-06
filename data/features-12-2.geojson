@@ -1,0 +1,115 @@
+{
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Email Address": "ab.abarientos@gmail.com",
+        "title of work": "test 2",
+        "Video or Photo Submission": "https://drive.google.com/open?id=1lI-hRRA9QeiRab9FX0OHnH3xrXmJN6kd",
+        "last name": "test2",
+        "Timestamp": "11/18/2020 14:40:31",
+        "first name": "test2",
+        "description": "adfasdfa",
+        "url submission": "",
+        "text submission": ""
+      },
+      "geometry": {
+        "coordinates": [
+          -121.86,
+          37.33
+        ],
+        "type": "Point"
+      },
+      "id": "29f5823cd332b8e1704ab08ded562b65"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Email Address": "ab.abarientos@gmail.com",
+        "title of work": "Holding Down the City",
+        "Video or Photo Submission": "https://drive.google.com/open?id=1RcE4UPPE-NZSVa079Snen9pRcbleY2LZ",
+        "last name": "Carma",
+        "Timestamp": "11/18/2020 13:46:20",
+        "first name": "Zoey",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+        "url submission": "",
+        "text submission": ""
+      },
+      "geometry": {
+        "coordinates": [
+          -121.875,
+          37.33
+        ],
+        "type": "Point"
+      },
+      "id": "801f275a4b6d9467ad6d694081211760"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Email Address": "ab.abarientos@gmail.com",
+        "title of work": "Fragrant City",
+        "Video or Photo Submission": "",
+        "last name": "abarientos",
+        "Timestamp": "11/18/2020 13:14:50",
+        "first name": "angelabelle",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+        "url submission": "www.angelabelle.co",
+        "text submission": ""
+      },
+      "geometry": {
+        "coordinates": [
+          -121.88,
+          37.33
+        ],
+        "type": "Point"
+      },
+      "id": "9d320c181f4b2366a57bbab59237546e"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Email Address": "ab.abarientos@gmail.com",
+        "title of work": "test",
+        "Video or Photo Submission": "https://drive.google.com/open?id=1WpEcCnzJLZ2Ev7leIJ-NQWNx9_kZkuoJ",
+        "last name": "test",
+        "Timestamp": "11/18/2020 14:32:10",
+        "first name": "Test",
+        "description": "asdfljsadfjaosdf",
+        "url submission": "",
+        "text submission": ""
+      },
+      "geometry": {
+        "coordinates": [
+          -121.865,
+          37.33
+        ],
+        "type": "Point"
+      },
+      "id": "e0d157dbada4d6d799fa959fa44afaba"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Email Address": "ab.abarientos@gmail.com",
+        "title of work": "Welcoming the Old",
+        "Video or Photo Submission": "https://drive.google.com/open?id=1uMXBbD_gpkihGWbZEReTyKxykfsWCV5Z",
+        "last name": "Adams",
+        "Timestamp": "11/18/2020 13:51:56",
+        "first name": "Rachel",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+        "url submission": "",
+        "text submission": ""
+      },
+      "geometry": {
+        "coordinates": [
+          -121.87,
+          37.33
+        ],
+        "type": "Point"
+      },
+      "id": "fcb341fae2b59f49b3214f777920db36"
+    }
+  ],
+  "type": "FeatureCollection"
+}
