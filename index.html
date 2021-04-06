@@ -8,7 +8,7 @@
   <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
   <script src="js/jq.js" type="text/javascript"></script>
   <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="css/map.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -26,35 +26,30 @@
   <div id="map"></div>
   <nav id="filter-group" class="filter-group">
 
- </nav>
- <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+  </nav>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
   </a>
 
 
   <script>
-  //for hashtag menu
+    //for hashtag menu
 
-  function myFunction()
-  {
-    // document.getElementById("filter-group").style.display = "block";
-    var x = document.getElementById("filter-group");
-    // console.log(window.getComputedStyle(x));
-    // return filterEl.style.display === 'block';
-    if (window.getComputedStyle(x).display === "block")
-    {
-      document.getElementById("filter-group").style.display = "none";
-      console.log('filter group will be hidden');
-    }
-    else if (window.getComputedStyle(x).display === "none")
-    {
+    function myFunction() {
+      // document.getElementById("filter-group").style.display = "block";
+      var x = document.getElementById("filter-group");
+      // console.log(window.getComputedStyle(x));
+      // return filterEl.style.display === 'block';
+      if (window.getComputedStyle(x).display === "block") {
+        document.getElementById("filter-group").style.display = "none";
+        console.log('filter group will be hidden');
+      } else if (window.getComputedStyle(x).display === "none") {
         document.getElementById("filter-group").style.display = "block";
         console.log('filter group will be shown');
+      } else {
+        console.log('filter group will not change');
+      }
     }
-    else {
-      console.log('filter group will not change');
-    }
-  }
     mapboxgl.accessToken = 'pk.eyJ1IjoiYW5nZWxhYmVsZWwiLCJhIjoiY2tmZjBiOTJ1MDYxcTJ4bGFzaHdyOGxqMiJ9.JJKlupKeMOJml7UyPVzvKg';
     var geojsonData;
     var shownLayer = [];
@@ -124,15 +119,14 @@
       // Get the image and insert it inside the modal - use its "alt" text as a caption
       var img = document.getElementsByClassName("artist-img");
       var modalImg = document.getElementById("img01");
-      for(var i=0;i < img.length;i++)
-       {
-        img[i].onclick = function(){
+      for (var i = 0; i < img.length; i++) {
+        img[i].onclick = function() {
 
-        modal.style.display = "block";
-           modalImg.src = this.src;
+          modal.style.display = "block";
+          modalImg.src = this.src;
 
-         }
-       }
+        }
+      }
 
       // img.onclick = function() {
       //   modal.style.display = "block";
@@ -280,12 +274,23 @@
           var currentLink = prop["photo submission"];
           // console.log("current link: " + currentLink);
           //grabs the id of the media
-          var newLink = currentLink.substring(currentLink.lastIndexOf('id='), currentLink.length);
-          // console.log("new link: " + newLink);
+
+          String.prototype.indexOfEnd = function(string) {
+            var io = this.indexOf(string);
+            return io == -1 ? -1 : io + string.length;
+          }
 
 
+          var newLink = currentLink.substring(currentLink.indexOfEnd('id='), currentLink.length);
+          console.log("new link: " + newLink);
 
-          details.innerHTML += "<br />" + "<img class ='artist-img' src='https://www.drive.google.com/uc?export=view&" + newLink +
+          // currentLink = "12ErPkEiB-Y34HUcOmrSEVIzTmm5LXxlw";
+
+          // details.innerHTML += "<br />" + "<img class ='artist-img' src='https://drive.google.com/uc?export=view&" + newLink +
+          //   "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>"
+
+
+          details.innerHTML += "<br />" + "<img class ='artist-img' src='https://drive.google.com/uc?export=view&id=" + newLink +
             "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>"
 
           // details.innerHTML += "<br />" + "<img src='media/artgallery.jpg'/>"
