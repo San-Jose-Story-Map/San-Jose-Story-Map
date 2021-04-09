@@ -386,6 +386,7 @@ transition: 0.5s;
 
 .artist-img:hover {opacity: 0.7;}
 
+
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -402,18 +403,27 @@ transition: 0.5s;
 
 }
 
+/* #myModal
+{
+  height: 100%;
+  width: 100%;
+} */
+
+
 /* Modal Content (image) */
 .modal-content {
   margin: auto;
   display: block;
-  width: 80%;
-  max-height: 90%;
+  /* width: 100px; */
+  /* height: 100%; */
+  /* max-height: 90%; */
 }
 
 #img01
 {
-  width: 80%;
-  max-height: 90%;
+  height: 90%;
+  width: auto;
+  overflow: none;
 }
 
 
