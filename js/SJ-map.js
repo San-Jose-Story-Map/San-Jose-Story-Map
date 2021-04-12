@@ -255,10 +255,21 @@ function buildLocationList(data) {
       //   "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>"
 
 
-      details.innerHTML += "<br />" + "<img class ='artist-img' src='https://drive.google.com/uc?export=view&id=" + newLink +
+      // details.innerHTML += "<iframe class ='artist-img' src='https://drive.google.com/file/d/" + newLink + "/preview'</iframe><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>";
+
+
+      // details.innerHTML += "<br />" + "<img class ='artist-img' src='https://drive.google.com/uc?id=" + newLink +
+      //   "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>"
+
+
+      // details.innerHTML += "<br />" + "<img class ='artist-img' src='https://drive.google.com/uc?export=view&id=" + newLink +
+      //   "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>"
+
+      details.innerHTML += "<br />" + "<img class ='artist-img' src='https://drive.google.com/uc?id=" + newLink +
         "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>"
 
-      // details.innerHTML += "<br />" + "<img src='media/artgallery.jpg'/>"
+
+      // details.innerHTML += "<br />" + "<img class ='artist-img' src='media/artgallery.jpg'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>"
     }
 
     if (prop["video submission"]) {

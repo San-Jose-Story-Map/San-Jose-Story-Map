@@ -212,8 +212,8 @@ a.title {
 }
 
 .item img {
-  width: 100%;
-  height: auto;
+  /* width: 100%;
+  height: auto; */
 }
 
 .item iframe {
@@ -382,6 +382,11 @@ transition: 0.5s;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
+  max-height: 350px;
+  margin-left: 25%;
+  margin-right: auto;
+  width: 50%;
+  height: auto;
 }
 
 .artist-img:hover {opacity: 0.7;}
