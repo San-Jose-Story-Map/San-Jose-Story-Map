@@ -251,25 +251,16 @@ function buildLocationList(data) {
 
       // currentLink = "12ErPkEiB-Y34HUcOmrSEVIzTmm5LXxlw";
 
-      // details.innerHTML += "<br />" + "<img class ='artist-img' src='https://drive.google.com/uc?export=view&" + newLink +
-      //   "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>"
-
-
-      // details.innerHTML += "<iframe class ='artist-img' src='https://drive.google.com/file/d/" + newLink + "/preview'</iframe><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>";
-
-
-      // details.innerHTML += "<br />" + "<img class ='artist-img' src='https://drive.google.com/uc?id=" + newLink +
-      //   "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>"
-
 
       // details.innerHTML += "<br />" + "<img class ='artist-img' src='https://drive.google.com/uc?export=view&id=" + newLink +
       //   "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>"
 
-      details.innerHTML += "<br />" + "<img class ='artist-img' src='https://drive.google.com/uc?id=" + newLink +
+
+      details.innerHTML += "<br />" + "<img class ='artist-img' src='" + "https://drive.google.com/uc?id=" + newLink +
         "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>"
 
 
-      // details.innerHTML += "<br />" + "<img class ='artist-img' src='media/artgallery.jpg'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>"
+      // details.innerHTML += "<br />" + "<img class ='artist-img' src='media/lucia.jpg'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>"
     }
 
     if (prop["video submission"]) {

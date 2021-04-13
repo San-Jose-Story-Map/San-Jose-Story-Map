@@ -1,6 +1,5 @@
 {
-  "features": [
-    {
+  "features": [{
       "type": "Feature",
       "properties": {
         "terms": "I have read and agree to the terms and conditions.",
@@ -233,10 +232,10 @@
         "Timestamp": "2/28/2021 12:32:37",
         "audio": "",
         "bio url": "David Denny is a poet and fiction writer living in Cupertino. Recent books include Sometimes Only the Sad Songs Will Do, Some Divine Commotion, The Gill Man in Purgatory, and Fool in the Attic. He is Professor of English at De Anza College and a recipient of an Artist Laureate Award from the Silicon Valley Arts Council.",
-        "photo submission": "https://drive.google.com/open?id=1UBvdkcwWC1fZ6qoNavTzDn6lZ_xKsyPb",
+        "photo submission": "",
         "first name": "David",
         "url submission": "",
-        "text submission": ""
+        "text submission": "after Jeffrey Harrison\n\nThere are those for whom the mountain is just one more fitness course made to work the quads and boost the heart rate.Once they hit the peak, they claim the view, comment on the weather, compare pedometers.They can’ t stand still for long lest their muscles begin to cool and cramp. They can’ t wait to descend, to arrive at the coffee shop in full regalia and check today’ s trail off their list. For them, one switch -backed, fat - burning ascent may very well be mistaken for another.\n\nAnd there are those for whom the hike is a social outing— a chance to walk their dogs and complain of their lot: their inattentive spouse, their burdensome children.When they finally stumble across the bench in the clearing, Fido straining at the leash, tongue lolling, they sit just long enough to water the animal and ready the plastic baggie for collection.They’ ve missed the quail and white - tailed deer, the rattlesnake and painted ladies flittering among trailside thistles. No wild thought has intruded upon their day.\n\nAnd then there are those lonesome fools for whom the trail is a listening post on the universe.Attuned to the daily office of blossom and rot, their ears are pricked up for mystery borne upon the liquid rustle of summer leaves. Their eyes wander towards the shadowy undergrowth, the wagging branch, the tremendous wings slicing across the sky.They break through at the startling peak just as the breeze’s lullaby chimes its final notes. Stalked by some divine commotion, they gaze over the fertile valley, speechless, attentive, still."
       },
       "geometry": {
         "coordinates": [

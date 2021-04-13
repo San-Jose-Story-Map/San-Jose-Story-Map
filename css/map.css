@@ -383,9 +383,9 @@ transition: 0.5s;
   cursor: pointer;
   transition: 0.3s;
   max-height: 350px;
-  margin-left: 25%;
+  margin-left: 20%;
   margin-right: auto;
-  width: 50%;
+  width: 60%;
   height: auto;
 }
 
