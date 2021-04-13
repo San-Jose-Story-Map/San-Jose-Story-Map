@@ -275,7 +275,11 @@ function buildLocationList(data) {
     }
 
     if (prop["text submission"]) {
-      details.innerHTML += "<br />" + prop["text submission"] + "<br />"
+
+      var newText = prop["text submission"];
+      var resText = newText.replace(/\n/g,'<br />');
+      console.log(resText);
+      details.innerHTML += "<br />" + resText + "<br />"
     }
 
     if (prop["url submission"]) {
