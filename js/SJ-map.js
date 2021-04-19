@@ -15,6 +15,7 @@ function myFunction() {
     console.log('filter group will not change');
   }
 }
+
 mapboxgl.accessToken = 'pk.eyJ1IjoiYW5nZWxhYmVsZWwiLCJhIjoiY2tmZjBiOTJ1MDYxcTJ4bGFzaHdyOGxqMiJ9.JJKlupKeMOJml7UyPVzvKg';
 var geojsonData;
 var shownLayer = [];
@@ -42,10 +43,7 @@ var sanjose = [-121.8863, 37.3382];
 //create new map
 var map = new mapboxgl.Map({
   container: 'map',
-  // style: 'mapbox://styles/angelabelel/ckgsyvwj40qz119s6c53tzsj0',
   style: 'mapbox://styles/angelabelel/ckgt02ax50s3m19s6yoh62d7p',
-  // style: 'mapbox://styles/angelabelel/ckgtxambb09sv19n2qgtmxf82',
-  // style: 'mapbox://styles/angelabelel/ckgtxld6k0a2v19n2po6v1gpq',
   zoom: 10,
   center: sanjose
 });
@@ -125,6 +123,13 @@ map.on('load', function() {
       var symbol = "";
     } else {
       var symbol = feature.properties['hashtag'];
+      symbol = symbol.replace('#', '');
+      if (symbol.includes(',')) {
+        var firstHash = symbol.substring(0, symbol.indexOf(","));
+        console.log("first hash" + firstHash);
+        symbol = firstHash;
+      }
+
     }
     var layerID = 'poi-' + symbol;
     shownLayer[indexListing] = layerID;
@@ -277,8 +282,8 @@ function buildLocationList(data) {
     if (prop["text submission"]) {
 
       var newText = prop["text submission"];
-      var resText = newText.replace(/\n/g,'<br />');
-      console.log(resText);
+      var resText = newText.replace(/\n/g, '<br />');
+      // console.log(resText);
       details.innerHTML += "<br />" + resText + "<br />"
     }
 
