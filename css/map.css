@@ -382,11 +382,12 @@ transition: 0.5s;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
-  max-height: 350px;
-  margin-left: 20%;
-  margin-right: auto;
+  /* max-height: 350px; */
+  text-align: center;
   width: 60%;
   height: auto;
+  margin-left: 20%;
+  margin-right: auto;
 }
 
 .artist-img:hover {opacity: 0.7;}
@@ -428,7 +429,7 @@ transition: 0.5s;
 {
   height: 90%;
   width: auto;
-  overflow: none;
+  overflow: hidden;
 }
 
 
@@ -576,25 +577,31 @@ transition: 0.5s;
   }
 
   #filter-group {
-
-    position: fixed;
+    position: absolute;
     top: 50%;
     right: 0px;
     z-index: 1;
     border-radius: 3px;
     width: 100px;
     display: none;
-    margin-top: 0px;
+    margin-top: 50px;
+    height: 40%;
+    overflow-y: scroll;
+    font-size: .45em;
   }
 
   #hashtag-header-text
   {
-    padding-top: 28px;
-    margin-top: 0px;
+    position: fixed;
+    margin-top: -55px;
+    width: 100px;
+
+    /* padding-bottom: 50px; */
     /* border-bottom: none; */
   }
 
   #filter-group input[type='checkbox']+label {
+    clear: both;
     background-color: #ccc;
     text-transform: capitalize;
     display: block;
@@ -607,6 +614,12 @@ transition: 0.5s;
     top: 50%;
     right: 10px;
     z-index:5;
+  }
+  #img01
+  {
+    margin-top: 20px;
+    width: 90%;
+    height: auto;
   }
 
 }

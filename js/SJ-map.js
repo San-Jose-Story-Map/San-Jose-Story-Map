@@ -24,7 +24,7 @@ var indexListing;
 // Store local geojson file into a variable
 $(document).ready(function() {
   //thinking that we manally update the geojson file
-  $.getJSON('data/2021-04-05-updated-features.geojson', function(results) {
+  $.getJSON('data/2021-04-26-features.geojson', function(results) {
     // Assign the results to the geojsonData variable
     geojsonData = results;
     //for testing
