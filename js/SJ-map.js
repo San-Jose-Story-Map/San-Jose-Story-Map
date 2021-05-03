@@ -24,7 +24,7 @@ var indexListing;
 // Store local geojson file into a variable
 $(document).ready(function() {
   //thinking that we manally update the geojson file
-  $.getJSON('data/2021-04-26-updated-features.geojson', function(results) {
+  $.getJSON('data/2021-05-03-features.geojson', function(results) {
     // Assign the results to the geojsonData variable
     geojsonData = results;
     //for testing
@@ -117,16 +117,16 @@ map.on('load', function() {
   filterGroup.appendChild(filterHeader);
 
   geojsonData.features.forEach(function(feature) {
-
+    var symbol;
     //checks if artist/writer chose a hashtag
     if (!feature.properties['hashtag']) {
-      var symbol = "";
+      symbol = "";
     } else {
-      var symbol = feature.properties['hashtag'];
+      symbol = feature.properties['hashtag'];
       symbol = symbol.replace('#', '');
       if (symbol.includes(',')) {
         var firstHash = symbol.substring(0, symbol.indexOf(","));
-        console.log("first hash" + firstHash);
+        console.log("first hash: " + firstHash);
         symbol = firstHash;
       }
 
@@ -147,6 +147,9 @@ map.on('load', function() {
           'icon-image': 'custom-marker',
           'icon-size': 0.15,
           'icon-allow-overlap': true,
+          'text-allow-overlap': true,
+          'text-ignore-placement': true,
+          'icon-ignore-placement': true,
           // get the title name from the source's "title" property
           'text-field': ['get', 'title'],
           'text-font': [
