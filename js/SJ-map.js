@@ -1,22 +1,19 @@
 //for hashtag menu
-
 function myFunction() {
-  // document.getElementById("filter-group").style.display = "block";
   var x = document.getElementById("filter-group");
-  // console.log(window.getComputedStyle(x));
-  // return filterEl.style.display === 'block';
   if (window.getComputedStyle(x).display === "block") {
     document.getElementById("filter-group").style.display = "none";
     console.log('filter group will be hidden');
   } else if (window.getComputedStyle(x).display === "none") {
     document.getElementById("filter-group").style.display = "block";
-    console.log('filter group will be shown');
+    // console.log('filter group will be shown');
   } else {
-    console.log('filter group will not change');
+    // console.log('filter group will not change');
   }
 }
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiYW5nZWxhYmVsZWwiLCJhIjoiY2tmZjBiOTJ1MDYxcTJ4bGFzaHdyOGxqMiJ9.JJKlupKeMOJml7UyPVzvKg';
+//user access code from Mapbox
+mapboxgl.accessToken = 'pk.eyJ1Ijoic2pzdG9yeW1hcCIsImEiOiJja29qNjB2OHIwNHF4MndsNTF2aXVzN2ppIn0.h_ndW1nP2uVfzSaf0SSHNg';
 var geojsonData;
 var shownLayer = [];
 var indexListing;
@@ -29,6 +26,7 @@ $(document).ready(function() {
     geojsonData = results;
     //for testing
     // console.log(results);
+    //assign each artist to an ID
     geojsonData.features.forEach(function(artist, i) {
       artist.properties.id = i;
       //for testing
@@ -43,7 +41,7 @@ var sanjose = [-121.8863, 37.3382];
 //create new map
 var map = new mapboxgl.Map({
   container: 'map',
-  style: 'mapbox://styles/angelabelel/ckgt02ax50s3m19s6yoh62d7p',
+  style: 'mapbox://styles/sjstorymap/ckoj67pd4132g17p5drie5i5a',
   zoom: 10,
   center: sanjose
 });
@@ -118,20 +116,26 @@ map.on('load', function() {
 
   geojsonData.features.forEach(function(feature) {
     var symbol;
-    //checks if artist/writer chose a hashtag
+    var originalHash;
+    //checks if artist/writer chose a hashtag and leaves it blank if none has been chosen
     if (!feature.properties['hashtag']) {
       symbol = "";
+      originalHash = "";
     } else {
       symbol = feature.properties['hashtag'];
+      originalHash = symbol;
       symbol = symbol.replace('#', '');
+      //checks if user has more than one hashtag, choose the first one
       if (symbol.includes(',')) {
         var firstHash = symbol.substring(0, symbol.indexOf(","));
         console.log("first hash: " + firstHash);
         symbol = firstHash;
       }
-
     }
+
+    //sets layerID to the new hashtag name
     var layerID = 'poi-' + symbol;
+    //array is made so that each layer interacts with other functions
     shownLayer[indexListing] = layerID;
     indexListing++;
 
@@ -159,7 +163,8 @@ map.on('load', function() {
           'text-offset': [0, 1.25],
           'text-anchor': 'top'
         },
-        'filter': ['==', 'hashtag', symbol]
+          'filter': ['==', 'hashtag', originalHash]
+
       });
 
       // Add checkbox and label elements for the layer.
@@ -182,8 +187,7 @@ map.on('load', function() {
           e.target.checked ? 'visible' : 'none'
         );
       });
-      //for testing
-      // console.log(shownLayer[0] + shownLayer[1]);
+
     }
 
   });
