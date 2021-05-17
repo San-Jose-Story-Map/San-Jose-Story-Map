@@ -450,7 +450,7 @@ function createPopUp(currentFeature) {
 
   if (currentFeature.properties['bio url']) {
     popupContent += "<a id='artist-bio' href='" +
-    "san-jose-story-map.github.io/artist-bio.html#" + currentFeature.properties['first name'] + currentFeature.properties['last name'] + "' target= 'blank'>" + "Artist Bio" + "</a>" + " - ";
+    "artist-bio.html#" + currentFeature.properties['first name'] + currentFeature.properties['last name'] + "' target= 'blank'>" + "Artist Bio" + "</a>" + " - ";
   }
 
   if (currentFeature.properties['personal url']) {
