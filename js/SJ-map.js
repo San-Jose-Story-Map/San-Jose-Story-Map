@@ -268,7 +268,7 @@ function buildLocationList(data) {
       //   "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>"
 
 
-      details.innerHTML += "<br />" + "<img class ='artist-img' src='" + "https://drive.google.com/uc?id=" + newLink +
+      details.innerHTML += "<br />" + "<img class ='artist-img' src='" + "http://drive.google.com/uc?id=" + newLink +
         "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>"
 
 
@@ -450,7 +450,7 @@ function createPopUp(currentFeature) {
 
   if (currentFeature.properties['bio url']) {
     popupContent += "<a id='artist-bio' href='" +
-      currentFeature.properties['bio url'] + "' target= 'blank'>" + "Artist Bio" + "</a>" + " - ";
+    "san-jose-story-map.github.io/artist-bio.html#" + currentFeature.properties['first name'] + currentFeature.properties['last name'] + "' target= 'blank'>" + "Artist Bio" + "</a>" + " - ";
   }
 
   if (currentFeature.properties['personal url']) {
