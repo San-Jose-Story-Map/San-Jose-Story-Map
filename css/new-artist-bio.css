@@ -12,7 +12,7 @@ body {
 }
 .page-section p{
 
-  text-align: center;
+  text-align: left;
   padding-left: 100px;
   padding-right: 100px;
 }
@@ -21,6 +21,11 @@ body {
 {
   color: #5C87C5;
   font-size: 4em;
+}
+.page-section h2.section-heading {
+  font-size: 2em;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 @media only screen and (max-width: 600px) {
