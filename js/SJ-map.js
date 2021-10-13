@@ -63,7 +63,6 @@ map.on('load', function() {
     function(error, image) {
 
       if (error) throw error;
-      console.log("map on load error");
 
       // Add the image to the map style.
       map.addImage('custom-marker', image);
@@ -138,7 +137,7 @@ map.on('load', function() {
     console.log("symbol: " + symbol + "\nfor artist: " + feature.properties['first name']);
     //sets layerID to the new hashtag name
     var layerID = 'poi-' + symbol;
-    console.log(layerID);
+    // console.log(layerID);
     //array is made so that each layer interacts with other functions
     shownLayer[indexListing] = layerID;
     indexListing++;
@@ -233,7 +232,9 @@ function buildLocationList(data) {
     link.className = 'title';
     link.id = "link-" + prop.id;
     //using the title of the piece as header
-    link.innerHTML = prop["title of work"];
+    link.innerHTML = '<div id="artist-name-listing">'+ prop['first name'] +
+      " " + prop['last name'] + '</div>';
+    link.innerHTML += prop["title of work"];
 
     //user the artist and description
     var details = listing.appendChild(document.createElement('div'));
@@ -349,7 +350,16 @@ function buildLocationList(data) {
       var bounds = element.getBoundingClientRect();
       //for testing
       // console.log("bounds top: " + bounds.top + " Window inner height:" + window.innerHeight + " Bounds bottom: " + bounds.bottom);
-      return bounds.top < window.innerHeight - (window.innerHeight / 1.3);
+      if (window.innerWidth < 600)
+      {
+        return bounds.top < window.innerHeight - (window.innerHeight /2);
+      }
+      else{
+        return bounds.top < window.innerHeight - (window.innerHeight / 3);
+      }
+
+
+      // return bounds.top < window.innerHeight && bounds.bottom > 0;
     };
   });
 }
@@ -375,8 +385,8 @@ function updateTilt() {
       if (newPitch != currentPitch) {
         map.setPitch(45);
         //for testing
-        console.log(currentZoom);
-        console.log(currentPitch);
+        // console.log(currentZoom);
+        // console.log(currentPitch);
       }
     }
 
@@ -390,8 +400,8 @@ function updateTilt() {
         //   essential: true
         // });
         //for testing
-        console.log(currentZoom);
-        console.log(currentPitch);
+        // console.log(currentZoom);
+        // console.log(currentPitch);
       }
     }
 
@@ -425,10 +435,10 @@ function createPopUp(currentFeature) {
     currentFeature.properties['first name'] +
     " " + currentFeature.properties['last name'] + '</div>';
 
-  if (currentFeature.properties['bio url']) {
-    popupContent += "<a id='artist-bio' href='" +
-      "artist-bio.html#" + currentFeature.properties['first name'] + currentFeature.properties['last name'] + "' target= 'blank'>" + "Artist Bio" + "</a>" + " - ";
-  }
+  // if (currentFeature.properties['bio url']) {
+  //   popupContent += "<a id='artist-bio' href='" +
+  //     "artist-bio.html#" + currentFeature.properties['first name'] + currentFeature.properties['last name'] + "' target= 'blank'>" + "Artist Bio" + "</a>" + " - ";
+  // }
 
   if (currentFeature.properties['personal url']) {
     popupContent += "<a id='artist-portfolio' href='" +

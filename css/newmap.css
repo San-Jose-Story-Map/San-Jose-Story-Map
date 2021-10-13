@@ -87,7 +87,7 @@ a:hover {
   text-decoration: none;
 }
 
-.listings .item:last-child { border-bottom: none; }
+.listings .item:last-child { border-bottom: none;}
 
 .listings .item .title {
   display: block;

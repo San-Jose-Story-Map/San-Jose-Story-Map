@@ -30,7 +30,7 @@ h1 {
   position: absolute;
   left: 33.3333%;
   width: 66.6666%;
-  top: 0;
+  top: 40px;
   bottom: 0;
   /* margin-top: 2.5%; */
 }
@@ -98,11 +98,11 @@ h1 {
 
 .listings .item.active .title,
 .listings .item .title:hover {
-  color: #5C87C5;
+  color: #404040;
 }
 
 .listings .item.active {
-  background-color: #f8f8f8;
+  background-color: #bfbfbf;
 }
 
 ::-webkit-scrollbar {
@@ -281,6 +281,12 @@ text-transform: uppercase;
 color: #7c9fd0;
 }
 
+#artist-name-listing
+{
+  text-transform: uppercase;
+  color: #7c9fd0;
+}
+
 .item video {
   width: 100%;
   border:none;
@@ -291,7 +297,7 @@ color: #7c9fd0;
 {
   color:#4ea0da;
   position: absolute;
-  top: 0px;
+  top: 50px;
   right: 10px;
   z-index:5;
 }
@@ -317,7 +323,7 @@ color: #7c9fd0;
   font: 12px/20px 'Calibri Family', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-weight: 500;
   position: absolute;
-  top: -15px;
+  top: 40px;
   right: 0px;
   z-index: 1;
   /* border-radius: 3px; */
@@ -536,11 +542,11 @@ transition: 0.5s;
 
   .mapSidebar {
     /* margin-top: 2.5%; */
-    height: 50%;
+    height: 40%;
     width: 100%;
     background: #eee;
     position: fixed;
-    top: 0;
+    top: 80px;
     z-index: 100;
   }
 
@@ -562,9 +568,8 @@ transition: 0.5s;
   }
 
   .listings {
-    height: 65%;
+    height: 40%;
     overflow: auto;
-    padding-bottom: 0px;
   }
 
   .mapboxgl-popup-content {
@@ -619,7 +624,6 @@ transition: 0.5s;
 
   .icon
   {
-
     position: absolute;
     top: 50%;
     right: 10px;

@@ -1,15 +1,42 @@
 html {
   scroll-behavior: smooth;
 }
+body {
+      background: #eee;
+}
 
+.page-section{
+  background: #5C87C5;
+  margin-right: 10%;
+  margin-left: 10%;
+}
 .page-section p{
-  padding-right: 100px;
-  padding-left: 100px;
+
   text-align: center;
+  padding-left: 100px;
+  padding-right: 100px;
 }
 
 #artist-bio-h
 {
   color: #5C87C5;
   font-size: 4em;
+}
+
+@media only screen and (max-width: 600px) {
+  .page-section p{
+    text-align: left;
+    padding-left: 10px;
+    padding-right: 10px;
+
+  }
+  .page-section{
+    padding-top:0px;
+    padding-bottom:0px;
+    margin: 0;
+  }
+  .page-section:first-of-type{
+    padding-top: 100px;
+  }
+
 }
