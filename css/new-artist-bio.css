@@ -1,3 +1,5 @@
+@import url("https://use.typekit.net/ell8vxy.css");
+
 html {
   scroll-behavior: smooth;
 }
@@ -27,6 +29,34 @@ body {
   padding-left: 10px;
   padding-right: 10px;
 }
+
+#artist-portfolio-bio
+{
+    color: #222;
+  font-variant: small-caps;
+  font-family: 'omnes-pro', sans-serif;
+font-weight: 700;
+font-style: normal;
+font-size: 1em;
+}
+
+#artist-portfolio-bio:hover
+{
+  color: #ddd;
+  font-style: italic;
+  text-decoration: none;
+}
+
+#artist-bio-name
+{
+  color: #222;
+font-variant: small-caps;
+font-family: 'omnes-pro', sans-serif;
+font-weight: 700;
+font-style: normal;
+/* font-size: 1em; */
+}
+
 
 @media only screen and (max-width: 600px) {
   .page-section p{
