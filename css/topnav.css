@@ -4,7 +4,6 @@
 nav {
   display: block;
   width: 100%;
-  font-size: .95em;
   text-align: left;
 }
 
@@ -16,8 +15,6 @@ ul {
   padding: 0px;
   padding-top: 5px;
   margin: 0px;
-
-
 }
 
 li {
@@ -27,17 +24,18 @@ li {
   list-style: none;
 }
 
-li a {
+li a:hover {
+  color: #5C87C5;
+  text-decoration: none;
+}
+
+.topnav-links, li a
+{
   font-family: 'Montserrat', sans-serif;
   font-size: .95em;
   letter-spacing: 0.0625em;
   /* font-weight: 200; */
   color: #bfbfbf;
-  text-decoration: none;
-}
-
-li a:hover {
-  color: #5C87C5;
   text-decoration: none;
 }
 

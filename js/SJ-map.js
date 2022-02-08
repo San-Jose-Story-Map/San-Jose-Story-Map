@@ -1,11 +1,11 @@
 //for hashtag menu to open upon click
 function hashtagMenu() {
-  var x = document.getElementById("filter-group");
+  var x = document.getElementById("hashtag-labels");
   if (window.getComputedStyle(x).display === "block") {
-    document.getElementById("filter-group").style.display = "none";
+    document.getElementById("hashtag-labels").style.display = "none";
     // console.log('filter group will be hidden');
   } else if (window.getComputedStyle(x).display === "none") {
-    document.getElementById("filter-group").style.display = "block";
+    document.getElementById("hashtag-labels").style.display = "block";
   }
 }
 
@@ -33,6 +33,8 @@ $(document).ready(function() {
 });
 
 var filterGroup = document.getElementById('filter-group');
+var hashtagLabels = document.createElement('div');
+hashtagLabels.id = "hashtag-labels";
 //coordinates for San Jose
 var sanjose = [-121.8863, 37.3382];
 //create new map
@@ -172,15 +174,17 @@ map.on('load', function() {
 
       // Add checkbox and label elements for the layer.
       var input = document.createElement('input');
+
       input.type = 'checkbox';
       input.id = layerID;
       input.checked = true;
-      filterGroup.appendChild(input);
+      hashtagLabels.appendChild(input);
 
       var label = document.createElement('label');
       label.setAttribute('for', layerID);
       label.textContent = symbol;
-      filterGroup.appendChild(label);
+      hashtagLabels.appendChild(label);
+      filterGroup.appendChild(hashtagLabels);
 
       // When the checkbox changes, update the visibility of the layer.
       input.addEventListener('change', function(e) {
@@ -261,7 +265,7 @@ function buildLocationList(data) {
       // console.log("new link: " + newLink);
 
 
-      details.innerHTML += "<br />" + "<img class ='artist-img' src='" + "http://drive.google.com/uc?id=" + newLink +
+      details.innerHTML += "<br />" + "<img class ='artist-img' src='" + "https://drive.google.com/uc?id=" + newLink +
         "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>"
 
     }
@@ -324,7 +328,7 @@ function buildLocationList(data) {
       for (var i = 0; i < data.features.length; i++) {
         checkListingLink = "link-" + i;
         visibleListingID = "listing-" + i;
-        if (isElementOnScreen(checkListingLink)) {
+        if (isElementOnScreen(checkListingLink)&& data.features[i].geometry.coordinates[1]) {
           visibleListing = data.features[i];
           //for testing
           // console.log("we are in the onscroll function at index: " + i);

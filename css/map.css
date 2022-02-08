@@ -9,13 +9,13 @@ body {
   height: 100%;
   width: 100%;
   margin: 0px;
-  background: #222;
+  background: #eee;
   color: #111;
   /* font: 500 20px/26px 'Helvetica Neue', Helvetica, Arial, Sans-serif; */
   font-family: 'omnes-pro', sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 1.3em;
+  font-size: 1em;
   overflow: hidden;
 }
 
@@ -31,7 +31,7 @@ h1 {
   position: absolute;
   left: 33.3333%;
   width: 66.6666%;
-  top: 40px;
+  top: 35px;
   bottom: 0;
   /* margin-top: 2.5%; */
 }
@@ -298,7 +298,7 @@ color: #7c9fd0;
 {
   color:#4ea0da;
   position: absolute;
-  top: 50px;
+  top: 43px;
   right: 10px;
   z-index:5;
 }
@@ -309,13 +309,16 @@ color: #7c9fd0;
     font: 1.3em 'Calibri Family', 'Helvetica Neue', Arial, Helvetica, sans-serif;
     font-weight: 500;
     /* border-radius: 3px 3px 0 0; */
-    background: rgba(255, 255, 255,0.7);
+    background: rgba(255, 255, 255,1);
     display: block;
     padding: 10px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    margin-top: 0px;
     margin-bottom: 0px;
     text-transform: capitalize;
-    padding-top: 30px;
+    position: fixed;
+    width: 100%;
+
 }
 
 
@@ -324,13 +327,20 @@ color: #7c9fd0;
   font: 12px/20px 'Calibri Family', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-weight: 500;
   position: absolute;
-  top: 40px;
+  top: 35px;
   right: 0px;
+  height: 100%;
   z-index: 1;
   /* border-radius: 3px; */
-  width: 110px;
+  width: 150px;
   color: #fff;
-  display: none;
+  overflow-y: scroll;
+  display: block;
+}
+
+#hashtag-labels{
+display: none;
+
 }
 
 #filter-group input[type='checkbox']:first-child+label {
@@ -527,6 +537,12 @@ transition: 0.5s;
   transition: 1s ease;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 
 
 
@@ -537,8 +553,23 @@ transition: 0.5s;
     font-size: 1em;
   }
 
+  .modal{
+top:80px
+  }
+
   .modal-content {
     width: 100%;
+  }
+  .logo
+  {
+    height: 20%;
+    width: 100%;
+  }
+  .logo img {
+    margin-left: 20%;
+    margin-right: auto;
+    width: auto;
+    height: 100%;
   }
 
   .mapSidebar {
@@ -569,7 +600,7 @@ transition: 0.5s;
   }
 
   .listings {
-    height: 40%;
+    height: 80%;
     overflow: auto;
   }
 
@@ -594,23 +625,24 @@ transition: 0.5s;
 
   #filter-group {
     position: absolute;
-    top: 50%;
+    top: 52%;
     right: 0px;
-    z-index: 1;
+    z-index:1;
     border-radius: 3px;
     width: 100px;
-    display: none;
-    margin-top: 50px;
+    display: block;
     height: 40%;
     overflow-y: scroll;
     font-size: .45em;
   }
 
+#hashtag-labels{
+margin-top: 30px;
+}
   #hashtag-header-text
   {
-    position: fixed;
-    margin-top: -55px;
     width: 100px;
+    border-radius: 2px;
 
     /* padding-bottom: 50px; */
     /* border-bottom: none; */
@@ -626,7 +658,7 @@ transition: 0.5s;
   .icon
   {
     position: absolute;
-    top: 50%;
+    top: 52.5%;
     right: 10px;
     z-index:5;
   }
@@ -637,4 +669,9 @@ transition: 0.5s;
     height: auto;
   }
 
+.topnav-links
+{
+  text-align: center;
+  padding-top: 5px;
+}
 }

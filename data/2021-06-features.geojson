@@ -35,6 +35,383 @@
       "type": "Feature",
       "properties": {
         "terms": "I have read and agree to the terms and conditions.",
+        "hashtag": "Visual Arts",
+        "statement": "",
+        "personal url": "",
+        "Email Address": "",
+        "video submission": "",
+        "I confirm that I am over the age of 18 and am not submitting copyrighted material that I do not own the rights to.": "I have read and agree to the terms and conditions.",
+        "title of work": "",
+        "Submission Format (select one)": "Image",
+        "last name": "",
+        "location": "",
+        "Timestamp": "",
+        "audio": "",
+        "bio url": "",
+        "photo submission": "",
+        "first name": "",
+        "url submission": "",
+        "text submission": ""
+      },
+      "geometry": {
+        "coordinates": [
+        ],
+        "type": "Point"
+      },
+      "id": "00aaa647332cb0f0ad79c28eae1db739"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "terms": "I have read and agree to the terms and conditions.",
+        "hashtag": "Literary Arts",
+        "statement": "",
+        "personal url": "",
+        "Email Address": "",
+        "video submission": "",
+        "I confirm that I am over the age of 18 and am not submitting copyrighted material that I do not own the rights to.": "I have read and agree to the terms and conditions.",
+        "title of work": "",
+        "Submission Format (select one)": "Image",
+        "last name": "",
+        "location": "",
+        "Timestamp": "",
+        "audio": "",
+        "bio url": "",
+        "photo submission": "",
+        "first name": "",
+        "url submission": "",
+        "text submission": ""
+      },
+      "geometry": {
+        "coordinates": [
+        ],
+        "type": "Point"
+      },
+      "id": "00aaa647332cb0f0ad79c28eae1db739"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "terms": "I have read and agree to the terms and conditions.",
+        "hashtag": "Performing Arts",
+        "statement": "",
+        "personal url": "",
+        "Email Address": "",
+        "video submission": "",
+        "I confirm that I am over the age of 18 and am not submitting copyrighted material that I do not own the rights to.": "I have read and agree to the terms and conditions.",
+        "title of work": "",
+        "Submission Format (select one)": "Image",
+        "last name": "",
+        "location": "",
+        "Timestamp": "",
+        "audio": "",
+        "bio url": "",
+        "photo submission": "",
+        "first name": "",
+        "url submission": "",
+        "text submission": ""
+      },
+      "geometry": {
+        "coordinates": [
+        ],
+        "type": "Point"
+      },
+      "id": "00aaa647332cb0f0ad79c28eae1db739"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "terms": "I have read and agree to the terms and conditions.",
+        "hashtag": "Finding Home",
+        "statement": "",
+        "personal url": "",
+        "Email Address": "",
+        "video submission": "",
+        "I confirm that I am over the age of 18 and am not submitting copyrighted material that I do not own the rights to.": "I have read and agree to the terms and conditions.",
+        "title of work": "",
+        "Submission Format (select one)": "Image",
+        "last name": "",
+        "location": "",
+        "Timestamp": "",
+        "audio": "",
+        "bio url": "",
+        "photo submission": "",
+        "first name": "",
+        "url submission": "",
+        "text submission": ""
+      },
+      "geometry": {
+        "coordinates": [
+        ],
+        "type": "Point"
+      },
+      "id": "00aaa647332cb0f0ad79c28eae1db739"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "terms": "I have read and agree to the terms and conditions.",
+        "hashtag": "Seeking Justice",
+        "statement": "",
+        "personal url": "",
+        "Email Address": "",
+        "video submission": "",
+        "I confirm that I am over the age of 18 and am not submitting copyrighted material that I do not own the rights to.": "I have read and agree to the terms and conditions.",
+        "title of work": "",
+        "Submission Format (select one)": "Image",
+        "last name": "",
+        "location": "",
+        "Timestamp": "",
+        "audio": "",
+        "bio url": "",
+        "photo submission": "",
+        "first name": "",
+        "url submission": "",
+        "text submission": ""
+      },
+      "geometry": {
+        "coordinates": [
+        ],
+        "type": "Point"
+      },
+      "id": "00aaa647332cb0f0ad79c28eae1db739"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "terms": "I have read and agree to the terms and conditions.",
+        "hashtag": "We too are San José",
+        "statement": "",
+        "personal url": "",
+        "Email Address": "",
+        "video submission": "",
+        "I confirm that I am over the age of 18 and am not submitting copyrighted material that I do not own the rights to.": "I have read and agree to the terms and conditions.",
+        "title of work": "",
+        "Submission Format (select one)": "Image",
+        "last name": "",
+        "location": "",
+        "Timestamp": "",
+        "audio": "",
+        "bio url": "",
+        "photo submission": "",
+        "first name": "",
+        "url submission": "",
+        "text submission": ""
+      },
+      "geometry": {
+        "coordinates": [
+        ],
+        "type": "Point"
+      },
+      "id": "00aaa647332cb0f0ad79c28eae1db739"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "terms": "I have read and agree to the terms and conditions.",
+        "hashtag": "Tech Talk",
+        "statement": "",
+        "personal url": "",
+        "Email Address": "",
+        "video submission": "",
+        "I confirm that I am over the age of 18 and am not submitting copyrighted material that I do not own the rights to.": "I have read and agree to the terms and conditions.",
+        "title of work": "",
+        "Submission Format (select one)": "Image",
+        "last name": "",
+        "location": "",
+        "Timestamp": "",
+        "audio": "",
+        "bio url": "",
+        "photo submission": "",
+        "first name": "",
+        "url submission": "",
+        "text submission": ""
+      },
+      "geometry": {
+        "coordinates": [
+        ],
+        "type": "Point"
+      },
+      "id": "00aaa647332cb0f0ad79c28eae1db739"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "terms": "I have read and agree to the terms and conditions.",
+        "hashtag": "Did you know?",
+        "statement": "",
+        "personal url": "",
+        "Email Address": "",
+        "video submission": "",
+        "I confirm that I am over the age of 18 and am not submitting copyrighted material that I do not own the rights to.": "I have read and agree to the terms and conditions.",
+        "title of work": "",
+        "Submission Format (select one)": "Image",
+        "last name": "",
+        "location": "",
+        "Timestamp": "",
+        "audio": "",
+        "bio url": "",
+        "photo submission": "",
+        "first name": "",
+        "url submission": "",
+        "text submission": ""
+      },
+      "geometry": {
+        "coordinates": [
+        ],
+        "type": "Point"
+      },
+      "id": "00aaa647332cb0f0ad79c28eae1db739"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "terms": "I have read and agree to the terms and conditions.",
+        "hashtag": "Sustainabililty",
+        "statement": "",
+        "personal url": "",
+        "Email Address": "",
+        "video submission": "",
+        "I confirm that I am over the age of 18 and am not submitting copyrighted material that I do not own the rights to.": "I have read and agree to the terms and conditions.",
+        "title of work": "",
+        "Submission Format (select one)": "Image",
+        "last name": "",
+        "location": "",
+        "Timestamp": "",
+        "audio": "",
+        "bio url": "",
+        "photo submission": "",
+        "first name": "",
+        "url submission": "",
+        "text submission": ""
+      },
+      "geometry": {
+        "coordinates": [
+        ],
+        "type": "Point"
+      },
+      "id": "00aaa647332cb0f0ad79c28eae1db739"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "terms": "I have read and agree to the terms and conditions.",
+        "hashtag": "Cultural History",
+        "statement": "",
+        "personal url": "",
+        "Email Address": "",
+        "video submission": "",
+        "I confirm that I am over the age of 18 and am not submitting copyrighted material that I do not own the rights to.": "I have read and agree to the terms and conditions.",
+        "title of work": "",
+        "Submission Format (select one)": "Image",
+        "last name": "",
+        "location": "",
+        "Timestamp": "",
+        "audio": "",
+        "bio url": "",
+        "photo submission": "",
+        "first name": "",
+        "url submission": "",
+        "text submission": ""
+      },
+      "geometry": {
+        "coordinates": [
+        ],
+        "type": "Point"
+      },
+      "id": "00aaa647332cb0f0ad79c28eae1db739"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "terms": "I have read and agree to the terms and conditions.",
+        "hashtag": "Generational Connectivity",
+        "statement": "",
+        "personal url": "",
+        "Email Address": "",
+        "video submission": "",
+        "I confirm that I am over the age of 18 and am not submitting copyrighted material that I do not own the rights to.": "I have read and agree to the terms and conditions.",
+        "title of work": "",
+        "Submission Format (select one)": "Image",
+        "last name": "",
+        "location": "",
+        "Timestamp": "",
+        "audio": "",
+        "bio url": "",
+        "photo submission": "",
+        "first name": "",
+        "url submission": "",
+        "text submission": ""
+      },
+      "geometry": {
+        "coordinates": [
+        ],
+        "type": "Point"
+      },
+      "id": "00aaa647332cb0f0ad79c28eae1db739"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "terms": "I have read and agree to the terms and conditions.",
+        "hashtag": "Transformation",
+        "statement": "",
+        "personal url": "",
+        "Email Address": "",
+        "video submission": "",
+        "I confirm that I am over the age of 18 and am not submitting copyrighted material that I do not own the rights to.": "I have read and agree to the terms and conditions.",
+        "title of work": "",
+        "Submission Format (select one)": "Image",
+        "last name": "",
+        "location": "",
+        "Timestamp": "",
+        "audio": "",
+        "bio url": "",
+        "photo submission": "",
+        "first name": "",
+        "url submission": "",
+        "text submission": ""
+      },
+      "geometry": {
+        "coordinates": [
+        ],
+        "type": "Point"
+      },
+      "id": "00aaa647332cb0f0ad79c28eae1db739"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "terms": "I have read and agree to the terms and conditions.",
+        "hashtag": "Social Justice",
+        "statement": "",
+        "personal url": "",
+        "Email Address": "",
+        "video submission": "",
+        "I confirm that I am over the age of 18 and am not submitting copyrighted material that I do not own the rights to.": "I have read and agree to the terms and conditions.",
+        "title of work": "",
+        "Submission Format (select one)": "Image",
+        "last name": "",
+        "location": "",
+        "Timestamp": "",
+        "audio": "",
+        "bio url": "",
+        "photo submission": "",
+        "first name": "",
+        "url submission": "",
+        "text submission": ""
+      },
+      "geometry": {
+        "coordinates": [
+        ],
+        "type": "Point"
+      },
+      "id": "00aaa647332cb0f0ad79c28eae1db739"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "terms": "I have read and agree to the terms and conditions.",
         "hashtag": "",
         "statement": "I am from faces I do not recognize \nAnd tongues I cannot speak\nFrom the writings of Sui Sin Far, \nOf both the far and middle East\nI am from ballads of kingdoms, oriental dreams\nAnd histories lost, that tie together all things\n\nI am from the California gold mines deep within the earth, \nWhere rough-hewn hands work in rhythm\nWith the clashes of metal and whistling steam\nMy pó po, wading in rice paddies, hearing war planes fly overhead\nThe smell of orchid and jasmine, or pungent tang of dry herbs,\nWafting through old dormitories on Angel Island\n\nI am from the pogroms of Eastern Europe (Poland, Ukraine, I can’t be sure)\nThat left our blood and names muddled, wrapped with\nPatterned cloth for safekeeping in the journey ahead\nHushed coven meetings of swarthy women, with\nTheir yiddish etched, sizzling, in the kitchen air\nWoven with familiar taste of pickled goods and warm bread\n\nI am from Michigan’s cast-iron sky, whose harsh\nSnow is as soft as Ezekiel Solomon’s furs\nWhere a sculpture of my grandmother sings out to me \nIn her bronze song, high and lonely across the years\nFaint, like the perfume that lingers on her scarves\nMusky and sweet as it clings to the skin\n\nI am from the heat of the last apricot orchard in bloom\nThe bitterness of hard, unripened fruit\nFrom the smell of lanolin and dog’s fur, wet from the rain\nThat pitter-patters the mossy roof while I sleep \nSoothed by the mourning dove’s call\nI am here, I am here\n\nI am from words I can’t pronounce\nAnd names with several iterations\nConjured by unseen mitzvahs \nand old-world superstition\nI am from the end\nBut also the beginning\n",
         "personal url": "",
