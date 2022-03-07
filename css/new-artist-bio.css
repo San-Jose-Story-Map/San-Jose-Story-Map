@@ -4,28 +4,31 @@ html {
   scroll-behavior: smooth;
 }
 body {
+  height: 100%;
       background: #eee;
       font-size: 1em;
-
+      color: #222;
+    font-variant: normal;
+    font-family: 'omnes-pro', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 1em;
 }
 
 .page-section{
-  background: #5C87C5;
+  background: #fff;
   margin-right: 10%;
   margin-left: 10%;
 }
-.page-section p{
 
-  text-align: left;
+
+.page-section p{
+  color: #454545;
   padding-left: 100px;
   padding-right: 100px;
 }
 
-#artist-bio-h
-{
-  color: #5C87C5;
-  font-size: 4em;
-}
+
 .page-section h2.section-heading {
   font-size: 2em;
   padding-left: 10px;
@@ -34,8 +37,8 @@ body {
 
 #artist-portfolio-bio
 {
-    color: #222;
-  font-variant: small-caps;
+    color: #5C87C5;
+  text-transform: uppercase;
   font-family: 'omnes-pro', sans-serif;
 font-weight: 700;
 font-style: normal;
@@ -44,7 +47,7 @@ font-size: 1em;
 
 #artist-portfolio-bio:hover
 {
-  color: #ddd;
+  color: #454545;
   font-style: italic;
   text-decoration: none;
 }

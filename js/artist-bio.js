@@ -2,7 +2,7 @@ var geojsonData;
 // Gathers artist details from geojson and stores it in variable
 $(document).ready(function() {
   //change the file when new submissions have been made
-  $.getJSON('data/2021-05-03-features.geojson', function(results) {
+  $.getJSON('data/2021-06-features.geojson', function(results) {
     geojsonData = results;
     geojsonData.features.forEach(function(artist, i) {
       var prop = artist.properties;
