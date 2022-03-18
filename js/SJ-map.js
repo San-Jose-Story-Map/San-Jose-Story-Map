@@ -113,6 +113,9 @@ map.on('load', function() {
   filterHeader.id = 'hashtag-header-text';
   filterGroup.appendChild(filterHeader);
 
+  var hashtagClickedOnce = false;
+  var currentClickedLayerID = "";
+
 
   //grabs all artist data in the geoJSON file and stores them into "feature"
   geojsonData.features.forEach(function(feature) {
@@ -147,7 +150,6 @@ map.on('load', function() {
 
     //creates a layer for each hashtag/filter
     if (!map.getLayer(layerID)) {
-
       map.addLayer({
         'id': layerID,
         'type': 'symbol',
@@ -177,7 +179,7 @@ map.on('load', function() {
 
       input.type = 'checkbox';
       input.id = layerID;
-      input.checked = true;
+      input.checked = false;
       hashtagLabels.appendChild(input);
 
       var label = document.createElement('label');
@@ -187,12 +189,59 @@ map.on('load', function() {
       filterGroup.appendChild(hashtagLabels);
 
       // When the checkbox changes, update the visibility of the layer.
+      // On first click, show just one and uncheck all other hashtag layers.
+
+      //if it is clicked and hashtagClickedOnce is False
+      //then change the visibility of all other HASHTAGS
+      //else stay normal
       input.addEventListener('change', function(e) {
-        map.setLayoutProperty(
-          layerID,
-          'visibility',
-          e.target.checked ? 'visible' : 'none'
-        );
+        currentClickedLayerID = layerID;
+        console.log("Current layer id is: " + currentClickedLayerID + "and target is: " + e.target.id);
+
+              if (hashtagClickedOnce == false) {
+                for (i = 0; i < shownLayer.length; i++) {
+                  if (currentClickedLayerID != shownLayer[i]) {
+                    console.log("shownlayercycle at: " + shownLayer[i]);
+                    map.setLayoutProperty(
+                      shownLayer[i],
+                      'visibility',
+                      'none'
+                    );
+
+                  }
+                  else {
+                    map.setLayoutProperty(
+                      shownLayer[i],
+                      'visibility',
+                      e.target.checked ? 'visible' : 'none'
+                    );
+
+                  }
+                }
+                hashtagClickedOnce = true;
+                console.log("hashtag clicked is: " + hashtagClickedOnce);
+              }
+              else {
+                map.setLayoutProperty(
+                  layerID,
+                  'visibility',
+                  e.target.checked ? 'visible' : 'none'
+                );
+              }
+        // else {
+        //   map.setLayoutProperty(
+        //     layerID,
+        //     'visibility',
+        //     e.target.checked ? 'visible' : 'none'
+        //   );
+        // }
+
+        // map.setLayoutProperty(
+        //   layerID,
+        //   'visibility',
+        //   e.target.checked ? 'visible' : 'none'
+        // );
+
       });
     }
 
@@ -278,7 +327,6 @@ function buildLocationList(data) {
       var newLink = currentLink.substring(currentLink.lastIndexOf('id='), currentLink.length);
       // console.log("new link: " + newLink);
       // details.innerHTML += "<br />" + "<video width='320' controls> <source src='media/idnaM.mp4' type='video/mp4'> </video>"
-      details.innerHTML += "<br />" + "<iframe src='" + "https://drive.google.com/uc?export=view&" + newLink + "' width = '600px' webkitallowfullscreen mozallowfullscreen allowfullscreen autoplay='0'> </iframe>"
     }
 
     if (prop["text submission"]) {
@@ -309,7 +357,7 @@ function buildLocationList(data) {
         if (this.id === "link-" + data.features[i].properties.id) {
           var clickedListing = data.features[i];
 
-          flyToStore(clickedListing);
+          flyToPin(clickedListing);
           createPopUp(clickedListing);
         }
       }
@@ -332,7 +380,7 @@ function buildLocationList(data) {
           visibleListing = data.features[i];
           //for testing
           // console.log("we are in the onscroll function at index: " + i);
-          flyToStore(visibleListing);
+          flyToPin(visibleListing);
           createPopUp(visibleListing);
 
           //updates the active item with scroll
@@ -413,7 +461,7 @@ function updateTilt() {
 }
 
 //allows the map to move depending on click/scroll
-function flyToStore(currentFeature) {
+function flyToPin(currentFeature) {
   var latitude = currentFeature.geometry.coordinates[1];
   var longitude = currentFeature.geometry.coordinates[0];
   map.flyTo({
@@ -476,7 +524,7 @@ map.on('click', function(e) {
       var clickedPoint = features[0];
 
       // Fly to the point
-      flyToStore(clickedPoint);
+      flyToPin(clickedPoint);
 
       //Close all other popups and display popup for clicked store
       createPopUp(clickedPoint);
