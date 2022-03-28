@@ -326,8 +326,7 @@ function buildLocationList(data) {
       // console.log("current link: " + currentLink);
       var newLink = currentLink.substring(currentLink.lastIndexOf('id='), currentLink.length);
       // console.log("new link: " + newLink);
-      // details.innerHTML += "<br />" + "<video width='320' controls> <source src='media/idnaM.mp4' type='video/mp4'> </video>"
-    }
+details.innerHTML += "<br />" + "<iframe src='" + "https://drive.google.com/uc?export=view&" + newLink + "' width = '600px' webkitallowfullscreen mozallowfullscreen allowfullscreen autoplay='0'> </iframe>"    }
 
     if (prop["text submission"]) {
 
