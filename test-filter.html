@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8 />
+  <title>San Jose Story Map</title>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+  <script src="js/jq.js" type="text/javascript"></script>
+  <script src='https://code.jquery.com/jquery-1.11.0.min.js'></script>
+  <!-- <script src="js/cookiePermissions.js" type="text/javascript"></script> -->
+  <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+  <script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
+  <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="css/map.css" rel="stylesheet" type="text/css" />
+  <link href="css/topnav.css" rel="stylesheet" type="text/css" />
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
+
+    .menu-ui {
+      background: #fff;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 1;
+      border-radius: 3px;
+      width: 120px;
+      border: 1px solid rgba(0, 0, 0, 0.4);
+    }
+
+    .menu-ui a {
+      font-size: 13px;
+      color: #404040;
+      display: block;
+      margin: 0;
+      padding: 0;
+      padding: 10px;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+      text-align: center;
+    }
+
+    .menu-ui a:first-child {
+      border-radius: 3px 3px 0 0;
+    }
+
+    .menu-ui a:last-child {
+      border: none;
+      border-radius: 0 0 3px 3px;
+    }
+
+    .menu-ui a:hover {
+      background: #f8f8f8;
+      color: #404040;
+    }
+
+    .menu-ui a.active,
+    .menu-ui a.active:hover {
+      background: #3887BE;
+      color: #FFF;
+    }
+
+    #marker-list {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200px;
+      bottom: 0;
+      overflow-x: auto;
+      background: #fff;
+      margin: 0;
+      padding: 5px;
+    }
+
+    #marker-list li {
+      padding: 5px;
+      margin: 0;
+      list-style-type: none;
+    }
+
+    #marker-list li:hover {
+      background: #eee;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- jQuery is required for this example. -->
+  <script src='https://code.jquery.com/jquery-1.11.0.min.js'></script>
+
+  <nav class='menu-ui'>
+    <a href='#' class='active' data-filter='all'>Show all</a>
+    <a href='#' data-filter='Californio'>Californio</a>
+    <a href='#' data-filter='COVID Chronicles'>COVID Chronicles</a>
+    <a href='#' data-filter='TBD'>TBD</a>
+  </nav>
+  <div id='map'></div>
+  <ul id='info'></ul>
+  <script>
+    L.mapbox.accessToken = 'pk.eyJ1Ijoic2pzdG9yeW1hcCIsImEiOiJja29qNjB2OHIwNHF4MndsNTF2aXVzN2ppIn0.h_ndW1nP2uVfzSaf0SSHNg';
+    // In the propeties object for each marker define key's
+    // like `rentals`, `fuel`, `tackleshop` that are set to true for false
+    // depending on whether or they exist at a location.
+
+    const markerIcon = L.icon({
+      iconSize: [25, 41],
+      iconAnchor: [10, 41],
+      popupAnchor: [2, -40],
+      // specify the path here
+      iconUrl: "media/sjstory-map-marker-2.png",
+    });
+
+    var map = L.mapbox.map('map')
+      .setView([37.3382, -121.8863], 10)
+      .addLayer(L.mapbox.styleLayer('mapbox://styles/sjstorymap/ckoj67pd4132g17p5drie5i5a'));
+
+
+    var myLayer = L.mapbox.featureLayer()
+      .addTo(map);
+
+    myLayer.loadURL('data/2021-06-features-test.geojson');
+
+    myLayer.on('layeradd', function(e) {
+      var marker = e.layer,
+        feature = marker.feature;
+      marker.setIcon(markerIcon);
+    });
+
+    console.log("hello");
+    var info = document.getElementById('info');
+    console.log("hello");
+    // Iterate through each feature layer item, build a
+    // marker menu item and enable a click event that pans to + opens
+    // a marker that's associated to the marker item.
+    myLayer.eachLayer(function(marker) {
+      console.log("hello");
+      var link = info.appendChild(document.createElement('a'));
+      link.className = 'item';
+      link.href = '#';
+
+      // Populate content from each markers object.
+      link.innerHTML = marker.feature.properties.hashtag;
+      console.log(link.innerHTML);
+      link.onclick = function() {
+        if (/active/.test(this.className)) {
+          this.className = this.className.replace(/active/, '').replace(/\s\s*$/, '');
+        } else {
+          var siblings = info.getElementsByTagName('a');
+          for (var i = 0; i < siblings.length; i++) {
+            siblings[i].className = siblings[i].className
+              .replace(/active/, '').replace(/\s\s*$/, '');
+          };
+          this.className += ' active';
+
+          // When a menu item is clicked, animate the map to center
+          // its associated marker and open its popup.
+          map.panTo(marker.getLatLng());
+          marker.openPopup();
+        }
+        return false;
+      };
+    });
+
+
+
+    $('.menu-ui a').on('click', function() {
+      // For each filter link, get the 'data-filter' attribute value.
+      var filter = $(this).data('filter');
+      // $(this).addClass('active');
+      $(this).addClass('active').siblings().removeClass('active');
+      myLayer.setFilter(function(f) {
+        // If the data-filter attribute is set to "all", return
+        // all (true). Otherwise, filter on markers that have
+        // a value set to true based on the filter name.
+        if (filter === 'all') {
+          return true;
+        } else if (f.properties["hashtag"].includes(filter)) {
+          return true;
+        } else {
+          return false;
+        }
+
+        // return (filter === 'all') ? true : f.properties[filter] === true;
+      });
+
+    });
+  </script>
+</body>
+
+</html>

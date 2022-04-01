@@ -19,7 +19,15 @@ body {
   overflow: hidden;
   position: fixed;
 }
+/*winner*/
 
+.winner{
+  padding: 0px;
+  margin: 0px;
+  color: #000;
+  font-style: normal;
+  font-size: .7em;
+}
 
 h1 {
   color: #eee;
@@ -36,6 +44,41 @@ h1 {
   bottom: 0;
   /* margin-top: 2.5%; */
 }
+.menu-ui {
+  background:#fff;
+  position:absolute;
+  top:10px;right:10px;
+  z-index:1;
+  border-radius:3px;
+  width:120px;
+  border:1px solid rgba(0,0,0,0.4);
+  }
+  .menu-ui a {
+    font-size:13px;
+    color:#404040;
+    display:block;
+    margin:0;padding:0;
+    padding:10px;
+    text-decoration:none;
+    border-bottom:1px solid rgba(0,0,0,0.25);
+    text-align:center;
+    }
+    .menu-ui a:first-child {
+      border-radius:3px 3px 0 0;
+      }
+    .menu-ui a:last-child {
+      border:none;
+      border-radius:0 0 3px 3px;
+      }
+    .menu-ui a:hover {
+      background:#f8f8f8;
+      color:#404040;
+      }
+    .menu-ui a.active,
+    .menu-ui a.active:hover {
+      background:#3887BE;
+      color:#FFF;
+      }
 
 .logo img {
   width: 100%;
@@ -93,6 +136,7 @@ h1 {
   display: block;
   color: #999;
   font-weight: 700;
+  /* background-color: #000; */
 }
 
 .listings .item .title small {
@@ -105,7 +149,7 @@ h1 {
 }
 
 .listings .item.active {
-  background-color: #bfbfbf;
+  background-color: #ddd;
 }
 
 ::-webkit-scrollbar {
@@ -273,21 +317,29 @@ transition: 0.3s;
 }
 
 .title {
-
 font-family: 'Calibri Family', sans-serif;
 font-style: italic;
 font-size: 1.2em;
 }
+
 
 #artist-name {
 text-transform: uppercase;
 color: #7c9fd0;
 }
 
-#artist-name-listing
+/* #artist-name-listing
 {
-  text-transform: uppercase;
+
   color: #7c9fd0;
+} */
+
+.title h1 {
+
+  color: #7c9fd0;
+  font-size: 1.5em;
+  margin: 0px;
+  font-style: normal;
 }
 
 .item video {
@@ -342,7 +394,7 @@ color: #7c9fd0;
 
 #hashtag-labels{
 display: none;
-position: absolute;
+position: static;
 top:40px;
 }
 

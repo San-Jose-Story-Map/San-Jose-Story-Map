@@ -1,24 +1,12 @@
-//for hashtag menu to open upon click
-function hashtagMenu() {
-  var x = document.getElementById("hashtag-labels");
-  if (window.getComputedStyle(x).display === "block") {
-    document.getElementById("hashtag-labels").style.display = "none";
-    // console.log('filter group will be hidden');
-  } else if (window.getComputedStyle(x).display === "none") {
-    document.getElementById("hashtag-labels").style.display = "block";
-  }
-}
-
 //user access code from Mapbox
-mapboxgl.accessToken = 'pk.eyJ1Ijoic2pzdG9yeW1hcCIsImEiOiJjbDFmbW9kdDYwMDZlM2lyMmttdWR2OGs3In0.5Roc_Q0q5dBc-HdWCed3zg';
+mapboxgl.accessToken = 'pk.eyJ1Ijoic2pzdG9yeW1hcCIsImEiOiJja29qNjB2OHIwNHF4MndsNTF2aXVzN2ppIn0.h_ndW1nP2uVfzSaf0SSHNg';
 var geojsonData;
-var shownLayer = [];
 var indexListing;
 
 // Store local geojson file into a variable
 $(document).ready(function() {
 
-  $.getJSON('data/features-2022-03-31.geojson', function(results) {
+  $.getJSON('data/2021-06-features.geojson', function(results) {
     // Assign the results to the geojsonData variable
     geojsonData = results;
     //for testing
@@ -32,10 +20,11 @@ $(document).ready(function() {
   });
 });
 
-var filterGroup = document.getElementById('filter-group');
-var hashtagLabels = document.createElement('div');
-hashtagLabels.id = "hashtag-labels";
-//coordinates for San José
+
+
+
+
+//coordinates for San Jose
 var sanjose = [-121.8863, 37.3382];
 //create new map
 var map = new mapboxgl.Map({
@@ -78,7 +67,24 @@ map.on('load', function() {
     'data': geojsonData
   });
   // adds the geojson file as a source into the map
-
+  map.addLayer({
+    'id': 'points',
+    'type': 'symbol',
+    'source': 'sj-story-data',
+    'layout': {
+      'icon-image': 'custom-marker',
+      'icon-size': 0.15,
+      'icon-allow-overlap': true,
+      // get the title name from the source's "title" property
+      'text-field': ['get', 'title'],
+      'text-font': [
+        'Open Sans Semibold',
+        'Arial Unicode MS Bold'
+      ],
+      'text-offset': [0, 1.25],
+      'text-anchor': 'top'
+    }
+  });
 
   buildLocationList(geojsonData);
 
@@ -94,7 +100,6 @@ map.on('load', function() {
       modalImg.src = this.src;
     }
   }
-
   // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("close")[0];
 
@@ -103,151 +108,29 @@ map.on('load', function() {
     modal.style.display = "none";
   }
 
-  // sets up a layer, 0 is the first layer
-  indexListing = 0;
 
-  //adds hashtag popup header
-  var filterHeader = document.createElement('H1');
-  var headerText = document.createTextNode("HASHTAGS");
-  filterHeader.appendChild(headerText);
-  filterHeader.id = 'hashtag-header-text';
-  filterGroup.appendChild(filterHeader);
-
-  var hashtagClickedOnce = false;
-  var currentClickedLayerID = "";
-
-
-  //grabs all artist data in the geoJSON file and stores them into "feature"
-  geojsonData.features.forEach(function(feature) {
-    var symbol;
-    var originalHash;
-    //checks if artist/writer chose a hashtag and leaves it blank if none has been chosen
-    if (!feature.properties['hashtag']) {
-      symbol = "";
-      originalHash = "";
-    } else {
-      originalHash = feature.properties['hashtag'];
-      symbol = originalHash;
-      if (symbol.includes('#')) {
-        symbol = symbol.replace('#', '');
-      }
-      //checks if user has more than one hashtag, choose the first one
-      if (symbol.includes(',')) {
-        var firstHash = symbol.substring(0, symbol.indexOf(","));
-        // console.log("first hash: " + firstHash);
-        symbol = firstHash;
+  $('.menu-ui a').on('click', function() {
+    // For each filter link, get the 'data-filter' attribute value.
+    var filter = $(this).data('filter');
+    // $(this).addClass('active');
+    $(this).addClass('active').siblings().removeClass('active');
+    geojsonData.setFilter(function(f) {
+      // If the data-filter attribute is set to "all", return
+      // all (true). Otherwise, filter on markers that have
+      // a value set to true based on the filter name.
+      if (filter === 'all') {
+        return true;
+      } else if (f.properties["hashtag"].includes(filter)) {
+        return true;
+      } else {
+        return false;
       }
 
-    }
-    console.log("symbol: " + symbol + "\nfor artist: " + feature.properties['first name']);
-    //sets layerID to the new hashtag name
-    var layerID = 'poi-' + symbol;
-    // console.log(layerID);
-    //array is made so that each layer interacts with other functions
-    shownLayer[indexListing] = layerID;
-    indexListing++;
-
-
-    //creates a layer for each hashtag/filter
-    if (!map.getLayer(layerID)) {
-      map.addLayer({
-        'id': layerID,
-        'type': 'symbol',
-        'source': 'sj-story-data',
-        'layout': {
-          'icon-image': 'custom-marker',
-          'icon-size': 0.15,
-          'icon-allow-overlap': true,
-          'text-allow-overlap': true,
-          'text-ignore-placement': true,
-          'icon-ignore-placement': true,
-          // get the title name from the source's "title" property
-          'text-field': ['get', 'title'],
-          'text-font': [
-            'Open Sans Semibold',
-            'Arial Unicode MS Bold'
-          ],
-          'text-offset': [0, 1.25],
-          'text-anchor': 'top'
-        },
-        'filter': ['==', 'hashtag', originalHash]
-        //**come back with issue
-      });
-
-      // Add checkbox and label elements for the layer.
-      var input = document.createElement('input');
-
-      input.type = 'checkbox';
-      input.id = layerID;
-      input.checked = false;
-      hashtagLabels.appendChild(input);
-
-      var label = document.createElement('label');
-      label.setAttribute('for', layerID);
-      label.textContent = symbol;
-      hashtagLabels.appendChild(label);
-      filterGroup.appendChild(hashtagLabels);
-
-      // When the checkbox changes, update the visibility of the layer.
-      // On first click, show just one and uncheck all other hashtag layers.
-
-      //if it is clicked and hashtagClickedOnce is False
-      //then change the visibility of all other HASHTAGS
-      //else stay normal
-      input.addEventListener('change', function(e) {
-        currentClickedLayerID = layerID;
-        console.log("Current layer id is: " + currentClickedLayerID + "and target is: " + e.target.id);
-
-              if (hashtagClickedOnce == false) {
-                for (i = 0; i < shownLayer.length; i++) {
-                  if (currentClickedLayerID != shownLayer[i]) {
-                    console.log("shownlayercycle at: " + shownLayer[i]);
-                    map.setLayoutProperty(
-                      shownLayer[i],
-                      'visibility',
-                      'none'
-                    );
-
-                  }
-                  else {
-                    map.setLayoutProperty(
-                      shownLayer[i],
-                      'visibility',
-                      e.target.checked ? 'visible' : 'none'
-                    );
-
-                  }
-                }
-                hashtagClickedOnce = true;
-                console.log("hashtag clicked is: " + hashtagClickedOnce);
-              }
-              else {
-                map.setLayoutProperty(
-                  layerID,
-                  'visibility',
-                  e.target.checked ? 'visible' : 'none'
-                );
-              }
-        // else {
-        //   map.setLayoutProperty(
-        //     layerID,
-        //     'visibility',
-        //     e.target.checked ? 'visible' : 'none'
-        //   );
-        // }
-
-        // map.setLayoutProperty(
-        //   layerID,
-        //   'visibility',
-        //   e.target.checked ? 'visible' : 'none'
-        // );
-
-      });
-    }
+      // return (filter === 'all') ? true : f.properties[filter] === true;
+    });
 
   });
-  // for testing
-  // console.log(indexListing);
+
 });
 
 
@@ -285,58 +168,9 @@ function buildLocationList(data) {
     link.className = 'title';
     link.id = "link-" + prop.id;
     //using the title of the piece as header
-    link.innerHTML = '<div><h1 id="'+link.id+'-h1">'+ prop['first name'] +
-      " " + prop['last name'] + '</h1></div>';
-
-      if (prop["category"]=="poetic")
-      {
-        if (prop["poetic winner"]=="TRUE")
-        {
-          link.innerHTML += "<h5 class = 'winner' id ='poetic-winner'>Poetic Postcard Winner<h5>"
-        }
-        else {
-          link.innerHTML += "<h5 class = 'category'>Poetic Postcard Submission<h5>"
-        }
-
-
-      }
-      else if (prop["category"]=="wish")
-      {
-        if (prop["wish winner"]=="TRUE")
-        {
-          link.innerHTML += "<h5 class = 'winner' id ='wish-winner'>Wish You Were Here Winner<h5>"
-        }
-        else {
-          link.innerHTML += "<h5 class = 'category'>Wish You Were Here<h5>"
-        }
-
-      }
-      else if (prop["category"]=="storymap")
-      {
-        if (prop["storymap winner"]=="TRUE")
-        {
-          link.innerHTML += "<h5 class = 'winner' id ='storymap-winner'>San José Story Map Winner<h5>"
-        }
-        else {
-          // link.innerHTML += "<h5 class = 'category'>San José Story Map<h5>"
-        }
-
-      }
-
+    link.innerHTML = '<div id="artist-name-listing">' + prop['first name'] +
+      " " + prop['last name'] + '</div>';
     link.innerHTML += prop["title of work"];
-
-    if (prop["poetic winner"]=="TRUE" || prop["wish winner"]=="TRUE" || prop["storymap winner"]=="TRUE")
-    {
-      document.getElementById(link.id).style.backgroundColor = "#ddb05a";
-      document.getElementById(link.id).style.padding = "10px";
-      document.getElementById(link.id+"-h1").style.color = "#000000";
-    }
-
-
-
-
-
-
 
     //user the artist and description
     var details = listing.appendChild(document.createElement('div'));
@@ -362,20 +196,9 @@ function buildLocationList(data) {
       var newLink = currentLink.substring(currentLink.indexOfEnd('id='), currentLink.length);
       // console.log("new link: " + newLink);
 
-      if (prop["photo submission 2"])
-      {
-          var currentLink2 = prop["photo submission 2"];
-          var newLink2 = currentLink2.substring(currentLink2.indexOfEnd('id='), currentLink2.length);
 
-          details.innerHTML += "<br />" + "<img class ='artist-img' src='" + "https://drive.google.com/uc?id=" + newLink +
-            "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>" +"<br />" + "<img class ='artist-img' src='" + "https://drive.google.com/uc?id=" + newLink2 +
-              "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>";
-
-      }
-      else {
-        details.innerHTML += "<br />" + "<img class ='artist-img' src='" + "https://drive.google.com/uc?id=" + newLink +
-          "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>";
-      }
+      details.innerHTML += "<br />" + "<img class ='artist-img' src='" + "https://drive.google.com/uc?id=" + newLink +
+        "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>"
 
     }
 
@@ -386,7 +209,8 @@ function buildLocationList(data) {
       // console.log("current link: " + currentLink);
       var newLink = currentLink.substring(currentLink.lastIndexOf('id='), currentLink.length);
       // console.log("new link: " + newLink);
-details.innerHTML += "<br />" + "<iframe src='" + "https://drive.google.com/uc?export=view&" + newLink + "' width = '600px' webkitallowfullscreen mozallowfullscreen allowfullscreen autoplay='0'> </iframe>"    }
+      details.innerHTML += "<br />" + "<iframe src='" + "https://drive.google.com/uc?export=view&" + newLink + "' width = '600px' webkitallowfullscreen mozallowfullscreen allowfullscreen autoplay='0'> </iframe>"
+    }
 
     if (prop["text submission"]) {
 
@@ -435,7 +259,7 @@ details.innerHTML += "<br />" + "<iframe src='" + "https://drive.google.com/uc?e
       for (var i = 0; i < data.features.length; i++) {
         checkListingLink = "link-" + i;
         visibleListingID = "listing-" + i;
-        if (isElementOnScreen(checkListingLink)&& data.features[i].geometry.coordinates[1]) {
+        if (isElementOnScreen(checkListingLink) && data.features[i].geometry.coordinates[1]) {
           visibleListing = data.features[i];
           //for testing
           // console.log("we are in the onscroll function at index: " + i);
@@ -461,11 +285,9 @@ details.innerHTML += "<br />" + "<iframe src='" + "https://drive.google.com/uc?e
       var bounds = element.getBoundingClientRect();
       //for testing
       // console.log("bounds top: " + bounds.top + " Window inner height:" + window.innerHeight + " Bounds bottom: " + bounds.bottom);
-      if (window.innerWidth < 600)
-      {
-        return bounds.top < window.innerHeight - (window.innerHeight /2);
-      }
-      else{
+      if (window.innerWidth < 600) {
+        return bounds.top < window.innerHeight - (window.innerHeight / 2);
+      } else {
         return bounds.top < window.innerHeight - (window.innerHeight / 3);
       }
 
@@ -475,7 +297,16 @@ details.innerHTML += "<br />" + "<iframe src='" + "https://drive.google.com/uc?e
   });
 }
 
-
+//for hashtag menu to open upon click
+// function hashtagMenu() {
+//   var x = document.getElementById("hashtag-labels");
+//   if (window.getComputedStyle(x).display === "block") {
+//     document.getElementById("hashtag-labels").style.display = "none";
+//     // console.log('filter group will be hidden');
+//   } else if (window.getComputedStyle(x).display === "none") {
+//     document.getElementById("hashtag-labels").style.display = "block";
+//   }
+// }
 
 map.on('zoom', () => {
   updateTilt();
@@ -573,30 +404,27 @@ function createPopUp(currentFeature) {
 map.on('click', function(e) {
   /* Determine if a feature in the "locations" layer exists at that point. */
   // forloop is in consideration of the added hashtag symbol layers
-  for (var i = 0; i < indexListing; i++) {
-    var features = map.queryRenderedFeatures(e.point, {
-      layers: [shownLayer[i]]
-    });
-    /* If yes, then: */
-    if (features.length) {
+  var features = map.queryRenderedFeatures(e.point, {
+    layers: ['points']
+  });
+  /* If yes, then: */
+  if (features.length) {
 
-      var clickedPoint = features[0];
+    var clickedPoint = features[0];
 
-      // Fly to the point
-      flyToPin(clickedPoint);
+    // Fly to the point
+    flyToPin(clickedPoint);
 
-      //Close all other popups and display popup for clicked store
-      createPopUp(clickedPoint);
-      // Highlight listing in sidebar (and remove highlight for all other listings)
-      var activeItem = document.getElementsByClassName('active');
-      if (activeItem[0]) {
-        activeItem[0].classList.remove('active');
-      }
-      var listing = document.getElementById('listing-' + clickedPoint.properties.id);
-      listing.classList.add('active');
-      listing.scrollIntoView();
+    //Close all other popups and display popup for clicked store
+    createPopUp(clickedPoint);
+    // Highlight listing in sidebar (and remove highlight for all other listings)
+    var activeItem = document.getElementsByClassName('active');
+    if (activeItem[0]) {
+      activeItem[0].classList.remove('active');
     }
-
+    var listing = document.getElementById('listing-' + clickedPoint.properties.id);
+    listing.classList.add('active');
+    listing.scrollIntoView();
   }
 
 });
