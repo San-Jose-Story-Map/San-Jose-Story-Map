@@ -18,7 +18,7 @@ var indexListing;
 // Store local geojson file into a variable
 $(document).ready(function() {
 
-  $.getJSON('data/features-2022-03-31.geojson', function(results) {
+  $.getJSON('data/sj-story-map-all-2022.geojson', function(results) {
     // Assign the results to the geojsonData variable
     geojsonData = results;
     //for testing
@@ -290,25 +290,17 @@ function buildLocationList(data) {
 
       if (prop["category"]=="poetic")
       {
-        if (prop["poetic winner"]=="TRUE")
-        {
-          link.innerHTML += "<h5 class = 'winner' id ='poetic-winner'>Poetic Postcard Winner<h5>"
-        }
-        else {
-          link.innerHTML += "<h5 class = 'category'>Poetic Postcard Submission<h5>"
-        }
+
+          link.innerHTML += "<h5 class = 'category'>Poetic Postcard Participant<h5>"
+
 
 
       }
       else if (prop["category"]=="wish")
       {
-        if (prop["wish winner"]=="TRUE")
-        {
-          link.innerHTML += "<h5 class = 'winner' id ='wish-winner'>Wish You Were Here Winner<h5>"
-        }
-        else {
-          link.innerHTML += "<h5 class = 'category'>Wish You Were Here<h5>"
-        }
+
+          link.innerHTML += "<h5 class = 'category'>Wish You Were Here Participant<h5>"
+
 
       }
       else if (prop["category"]=="storymap")
@@ -325,12 +317,12 @@ function buildLocationList(data) {
 
     link.innerHTML += prop["title of work"];
 
-    if (prop["poetic winner"]=="TRUE" || prop["wish winner"]=="TRUE" || prop["storymap winner"]=="TRUE")
-    {
-      document.getElementById(link.id).style.backgroundColor = "#ddb05a";
-      document.getElementById(link.id).style.padding = "10px";
-      document.getElementById(link.id+"-h1").style.color = "#000000";
-    }
+    // if (prop["poetic winner"]=="TRUE" || prop["wish winner"]=="TRUE" || prop["storymap winner"]=="TRUE")
+    // {
+    //   document.getElementById(link.id).style.backgroundColor = "#ddb05a";
+    //   document.getElementById(link.id).style.padding = "10px";
+    //   document.getElementById(link.id+"-h1").style.color = "#000000";
+    // }
 
 
 

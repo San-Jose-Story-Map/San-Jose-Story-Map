@@ -14,7 +14,7 @@ var sanjose = [-121.8863, 37.3382];
 // Store local geojson file into a variable
 $(document).ready(function() {
 
-  $.getJSON('data/sj-story-map-all-2022-winner.geojson', function(results) {
+  $.getJSON('data/sj-story-map-all-2022-becky.geojson', function(results) {
     // Assign the results to the geojsonData variable
     geojsonData = results;
     //for testing
@@ -33,7 +33,7 @@ $(document).ready(function() {
 var map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/sjstorymap/ckoj67pd4132g17p5drie5i5a', //current color scheme
-  zoom: 8.5,
+  zoom: 10,
   center: sanjose
 });
 
@@ -60,18 +60,6 @@ map.on('load', function() {
 
       // Add the image to the map style.
       map.addImage('custom-marker', image);
-
-    }
-  );
-
-  map.loadImage(
-    'media/sjstory-map-marker-winner.png',
-    function(error, image) {
-
-      if (error) throw error;
-
-      // Add the image to the map style.
-      map.addImage('custom-marker-winner', image);
 
     }
   );
@@ -107,6 +95,7 @@ map.on('load', function() {
 
     var originalHash;
     var layerID;
+    var beckyHash = 'SJResistArt';
     //checks if artist/writer chose a hashtag and leaves it blank if none has been chosen
     if (!feature.properties['all hashtags']) {
       symbol = "";
@@ -125,30 +114,60 @@ map.on('load', function() {
 
     //creates a layer for each hashtag/filter
     if (!map.getLayer(layerID)) {
-      map.addLayer({
-        'id': layerID,
-        'type': 'symbol',
-        'source': 'sj-story-data',
-        'layout': {
-          'icon-image': 'custom-marker',
-          'icon-size': 0.15,
-          'icon-allow-overlap': true,
-          'text-allow-overlap': true,
-          'text-ignore-placement': true,
-          'icon-ignore-placement': true,
-          // 'visibility': 'none',
-          // get the title name from the source's "title" property
-          'text-field': ['get', 'title'],
-          'text-font': [
-            'Open Sans Semibold',
-            'Arial Unicode MS Bold'
-          ],
-          'text-offset': [0, 1.25],
-          'text-anchor': 'top'
-        },
-        'filter': ['==', 'all hashtags', originalHash]
-        //**come back with issue
-      });
+
+      if (  originalHash == beckyHash)
+      {
+        map.addLayer({
+          'id': layerID,
+          'type': 'symbol',
+          'source': 'sj-story-data',
+          'layout': {
+            'icon-image': 'custom-marker',
+            'icon-size': 0.15,
+            'icon-allow-overlap': true,
+            'text-allow-overlap': true,
+            'text-ignore-placement': true,
+            'icon-ignore-placement': true,
+            // 'visibility': 'none',
+            // get the title name from the source's "title" property
+            'text-field': ['get', 'title'],
+            'text-font': [
+              'Open Sans Semibold',
+              'Arial Unicode MS Bold'
+            ],
+            'text-offset': [0, 1.25],
+            'text-anchor': 'top'
+          },
+          'filter': ['==', 'all hashtags', originalHash]
+          //**come back with issue
+        });
+      }
+      else {
+        map.addLayer({
+          'id': layerID,
+          'type': 'symbol',
+          'source': 'sj-story-data',
+          'layout': {
+            'icon-image': 'custom-marker',
+            'icon-size': 0.15,
+            'icon-allow-overlap': true,
+            'text-allow-overlap': true,
+            'text-ignore-placement': true,
+            'icon-ignore-placement': true,
+            'visibility': 'none',
+            // get the title name from the source's "title" property
+            'text-field': ['get', 'title'],
+            'text-font': [
+              'Open Sans Semibold',
+              'Arial Unicode MS Bold'
+            ],
+            'text-offset': [0, 1.25],
+            'text-anchor': 'top'
+          },
+          'filter': ['==', 'all hashtags', originalHash]
+          //**come back with issue
+        });
+      }
 
 
 
@@ -167,7 +186,14 @@ map.on('load', function() {
             input.type = 'checkbox';
             //target id
             input.id = artistHashtags[i];
-            input.checked = false;
+            if (artistHashtags[i] == 'SJResistArt')
+            {
+              input.checked = true;
+            }
+            else {
+              input.checked = false;
+            }
+
             hashtagLabels.appendChild(input);
             label.setAttribute('for', artistHashtags[i]);
 
@@ -175,24 +201,14 @@ map.on('load', function() {
             hashtagLabels.appendChild(label);
             filterGroup.appendChild(hashtagLabels);
 
+
             // When the checkbox changes, update the visibility of the layer.
+
+
 
             input.addEventListener('change', function(e) {
               const value = e.target.id;
-              //checks if it is the first hashtag clicked
-              //if it is, hide all other artists that don't use the hashtag
-              if (hashtagClickedOnce == false) {
-                for (const currentlayerID of layerIDs) {
-                  if (!currentlayerID.includes(value)) {
-                    map.setLayoutProperty(
-                      currentlayerID,
-                      'visibility',
-                      'none'
-                    );
-                  }
-                }
-                hashtagClickedOnce = true;
-              } else {
+
                 //checks if the artist used the hashtag,
                 //makes artist visible if their hashtag is clicked
                 for (const currentlayerID of layerIDs) {
@@ -205,7 +221,7 @@ map.on('load', function() {
                     );
                   }
                 }
-              }
+
             });
           } else {
 
@@ -217,18 +233,6 @@ map.on('load', function() {
 
       addToHash(feature);
     }
-
-
-        if (feature.properties['storymap winner'] == "TRUE")
-        {
-          //console.log("Current layer id is: " + currentlayerID + " and target is: " + e.target.id + "and is: " + currentlayerID.includes(value));
-          map.setLayoutProperty(
-            layerID,
-            'icon-image',
-            'custom-marker-winner'
-          );
-        }
-
 
   });
   // for testing
@@ -380,12 +384,7 @@ function buildLocationList(data) {
       document.getElementById(link.id).style.padding = "10px";
       document.getElementById(link.id + "-h1").style.color = "#000000";
 
-    }
-    // else if (prop["category"] == "storymap") {
-    //       link.innerHTML += "<h5 class = 'category'>San José Story Map Participant<h5>";
-    // }
-
-    else if (prop["category"] == "wish") {
+    } else if (prop["category"] == "wish") {
       if (prop["wish winner"] == "TRUE") {
         link.innerHTML += "<h5 class = 'winner' id ='wish-winner'>Wish You Were Here Winner<h5>";
       } else {
