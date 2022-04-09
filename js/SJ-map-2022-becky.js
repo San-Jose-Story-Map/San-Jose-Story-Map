@@ -372,31 +372,29 @@ function buildLocationList(data) {
     link.innerHTML = '<div><h1 id="' + link.id + '-h1">' + prop['first name'] +
       " " + prop['last name'] + '</h1></div>';
 
-    if (prop["storymap winner"] == "TRUE") {
+    // if (prop["storymap winner"] == "TRUE") {
+    //
+    //   link.innerHTML += "<h5 class = 'winner' id ='storymap-winner'>San José Story Map Winner<h5>";
+    //   document.getElementById(link.id).style.backgroundColor = "#ddb05a";
+    //   document.getElementById(link.id).style.padding = "10px";
+    //   document.getElementById(link.id + "-h1").style.color = "#000000";
+    // } else if (prop["storymap honor"] == "TRUE") {
+    //   link.innerHTML += "<h5 class = 'winner' id ='storymap-honor'>San José Story Map Honorable Mention<h5>";
+    //   document.getElementById(link.id).style.backgroundColor = "#7c9fd0";
+    //   document.getElementById(link.id).style.padding = "10px";
+    //   document.getElementById(link.id + "-h1").style.color = "#000000";
+    //
+    // } else
+    if (prop["category"] == "wish") {
 
-      link.innerHTML += "<h5 class = 'winner' id ='storymap-winner'>San José Story Map Winner<h5>";
-      document.getElementById(link.id).style.backgroundColor = "#ddb05a";
-      document.getElementById(link.id).style.padding = "10px";
-      document.getElementById(link.id + "-h1").style.color = "#000000";
-    } else if (prop["storymap honor"] == "TRUE") {
-      link.innerHTML += "<h5 class = 'winner' id ='storymap-honor'>San José Story Map Honorable Mention<h5>";
-      document.getElementById(link.id).style.backgroundColor = "#7c9fd0";
-      document.getElementById(link.id).style.padding = "10px";
-      document.getElementById(link.id + "-h1").style.color = "#000000";
-
-    } else if (prop["category"] == "wish") {
-      if (prop["wish winner"] == "TRUE") {
-        link.innerHTML += "<h5 class = 'winner' id ='wish-winner'>Wish You Were Here Winner<h5>";
-      } else {
         link.innerHTML += "<h5 class = 'category'>Wish You Were Here Participant<h5>";
-      }
+
 
     } else if (prop["category"] == "poetic") {
-      if (prop["poetic winner"] == "TRUE") {
-        link.innerHTML += "<h5 class = 'winner' id ='poetic-winner'>Poetic Postcard Winner<h5>";
-      } else {
+
+
         link.innerHTML += "<h5 class = 'category'>Poetic Postcards Participant<h5>";
-      }
+    
     }
 
     link.innerHTML += prop["title of work"];
