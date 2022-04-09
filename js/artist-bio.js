@@ -12,9 +12,9 @@ $(document).ready(function() {
   wishCon.className = 'wish-con';
   poeticCon.className = 'poetic-con';
 
-  storymapCon.innerHTML = "<h1>San José Story Map Artists</h1>";
-  wishCon.innerHTML = "<h1>Wish You Were Here Winners</h1>";
-  poeticCon.innerHTML = "<h1>Poetic Postcards Winners</h1>";
+  storymapCon.innerHTML = "<h1>San José Story Map Participants</h1>";
+  wishCon.innerHTML = "";
+  poeticCon.innerHTML = "";
 
 
 
