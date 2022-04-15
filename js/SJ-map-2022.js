@@ -2,6 +2,7 @@
 mapboxgl.accessToken = 'pk.eyJ1Ijoic2pzdG9yeW1hcCIsImEiOiJjbDFmbW9kdDYwMDZlM2lyMmttdWR2OGs3In0.5Roc_Q0q5dBc-HdWCed3zg';
 var geojsonData;
 var shownLayer = [];
+var popUps;
 var indexListing;
 var hashtags = [];
 const layerIDs = []; // This array will contain a list used to filter against.
@@ -50,7 +51,7 @@ if (!('remove' in Element.prototype)) {
 //waits for the map to load for other functions to work
 map.on('load', function() {
   //loads the custom markers
-
+  map.addControl(new mapboxgl.NavigationControl(), 'top-left');
 
   map.loadImage(
     'media/sjstory-map-marker-2.png',
@@ -178,6 +179,16 @@ map.on('load', function() {
             // When the checkbox changes, update the visibility of the layer.
 
             input.addEventListener('change', function(e) {
+              if (popUps) {
+                if (popUps[0]) popUps[0].remove();
+              }
+
+              map.zoomTo(8.5, {
+                duration: 2000,
+                offset: [100, 50],
+                pitch: 0
+              });
+
               const value = e.target.id;
               //checks if it is the first hashtag clicked
               //if it is, hide all other artists that don't use the hashtag
@@ -219,15 +230,14 @@ map.on('load', function() {
     }
 
 
-        if (feature.properties['storymap winner'] == "TRUE")
-        {
-          //console.log("Current layer id is: " + currentlayerID + " and target is: " + e.target.id + "and is: " + currentlayerID.includes(value));
-          map.setLayoutProperty(
-            layerID,
-            'icon-image',
-            'custom-marker-winner'
-          );
-        }
+    if (feature.properties['storymap winner'] == "TRUE") {
+      //console.log("Current layer id is: " + currentlayerID + " and target is: " + e.target.id + "and is: " + currentlayerID.includes(value));
+      map.setLayoutProperty(
+        layerID,
+        'icon-image',
+        'custom-marker-winner'
+      );
+    }
 
 
   });
@@ -278,6 +288,7 @@ function hashtagMenu() {
     // console.log('filter group will be hidden');
   } else if (window.getComputedStyle(x).display === "none") {
     document.getElementById("hashtag-labels").style.display = "block";
+
   }
 }
 
@@ -370,12 +381,12 @@ function buildLocationList(data) {
 
     if (prop["storymap winner"] == "TRUE") {
 
-      link.innerHTML += "<h5 class = 'winner' id ='storymap-winner'>San José Story Map Winner<h5>";
+      link.innerHTML += "<h5 class = 'winner' id ='storymap-winner'>Winner<h5>";
       document.getElementById(link.id).style.backgroundColor = "#ddb05a";
       document.getElementById(link.id).style.padding = "10px";
       document.getElementById(link.id + "-h1").style.color = "#000000";
     } else if (prop["storymap honor"] == "TRUE") {
-      link.innerHTML += "<h5 class = 'winner' id ='storymap-honor'>San José Story Map Honorable Mention<h5>";
+      link.innerHTML += "<h5 class = 'winner' id ='storymap-honor'>Honorable Mention<h5>";
       document.getElementById(link.id).style.backgroundColor = "#7c9fd0";
       document.getElementById(link.id).style.padding = "10px";
       document.getElementById(link.id + "-h1").style.color = "#000000";
@@ -385,22 +396,26 @@ function buildLocationList(data) {
     //       link.innerHTML += "<h5 class = 'category'>San José Story Map Participant<h5>";
     // }
 
-    else if (prop["category"] == "wish") {
-      if (prop["wish winner"] == "TRUE") {
-        link.innerHTML += "<h5 class = 'winner' id ='wish-winner'>Wish You Were Here Winner<h5>";
-      } else {
-        link.innerHTML += "<h5 class = 'category'>Wish You Were Here Participant<h5>";
-      }
+    // else if (prop["category"] == "wish") {
+    //   if (prop["wish winner"] == "TRUE") {
+    //     link.innerHTML += "<h5 class = 'winner' id ='wish-winner'>Wish You Were Here Winner<h5>";
+    //   } else {
+    //     link.innerHTML += "<h5 class = 'category'>Wish You Were Here Participant<h5>";
+    //   }
+    //
+    // } else if (prop["category"] == "poetic") {
+    //   if (prop["poetic winner"] == "TRUE") {
+    //     link.innerHTML += "<h5 class = 'winner' id ='poetic-winner'>Poetic Postcard Winner<h5>";
+    //   } else {
+    //     link.innerHTML += "<h5 class = 'category'>Poetic Postcards Participant<h5>";
+    //   }
+    // }
 
-    } else if (prop["category"] == "poetic") {
-      if (prop["poetic winner"] == "TRUE") {
-        link.innerHTML += "<h5 class = 'winner' id ='poetic-winner'>Poetic Postcard Winner<h5>";
-      } else {
-        link.innerHTML += "<h5 class = 'category'>Poetic Postcards Participant<h5>";
-      }
+    if (prop["title of work"] == "") {
+      link.innerHTML += "untitled";
+    } else {
+      link.innerHTML += prop["title of work"];
     }
-
-    link.innerHTML += prop["title of work"];
 
     // if (prop["poetic winner"] == "TRUE" || prop["wish winner"] == "TRUE" || prop["storymap winner"] == "TRUE") {
     //   document.getElementById(link.id).style.backgroundColor = "#ddb05a";
@@ -570,9 +585,9 @@ function updateTilt() {
   if (map.scrollZoom.isActive()) {
 
     if (currentZoom > 12) {
-      newPitch = 45;
+      newPitch = 65;
       if (newPitch != currentPitch) {
-        map.setPitch(45);
+        map.setPitch(newPitch);
         //for testing
         // console.log(currentZoom);
         // console.log(currentPitch);
@@ -582,7 +597,7 @@ function updateTilt() {
     if (currentZoom <= 11) {
       newPitch = 0;
       if (newPitch != currentPitch) {
-        map.setPitch(0);
+        map.setPitch(newPitch);
         // map.easeTo({
         //   pitch: 0,
         //   duration: 3000,
@@ -603,31 +618,32 @@ function flyToPin(currentFeature) {
   var longitude = currentFeature.geometry.coordinates[0];
   map.flyTo({
     center: [longitude, latitude + .006],
-    zoom: 13.5,
+    zoom: 12.5,
     speed: 0.5, // make the flying slow
     curve: 1, // change the speed at which it zooms out
     // bearing: 27,
-    pitch: 45,
+    pitch: 65,
     essential: true
   });
 }
 
 //creates popup over the location icon
 function createPopUp(currentFeature) {
-  var popUps = document.getElementsByClassName('mapboxgl-popup');
+  popUps = document.getElementsByClassName('mapboxgl-popup');
   var coorPad = currentFeature.geometry.coordinates;
   var popupContent = "";
 
-
-  popupContent = '<h3>' + currentFeature.properties['title of work'] +
-    '</h3>' + '<div id="artist-name">' +
-    currentFeature.properties['first name'] +
-    " " + currentFeature.properties['last name'] + '</div>';
-
-  // if (currentFeature.properties['bio url']) {
-  //   popupContent += "<a id='artist-bio' href='" +
-  //     "artist-bio.html#" + currentFeature.properties['first name'] + currentFeature.properties['last name'] + "' target= 'blank'>" + "Artist Bio" + "</a>" + " - ";
-  // }
+  if (currentFeature.properties["title of work"] == "") {
+    popupContent = '<h3>' + 'Untitled' +
+      '</h3>' + '<div id="artist-name">' +
+      currentFeature.properties['first name'] +
+      " " + currentFeature.properties['last name'] + '</div>';
+  } else {
+    popupContent = '<h3>' + currentFeature.properties["title of work"] +
+      '</h3>' + '<div id="artist-name">' +
+      currentFeature.properties['first name'] +
+      " " + currentFeature.properties['last name'] + '</div>';
+  }
 
   if (currentFeature.properties['personal url']) {
     popupContent += "<a id='artist-portfolio' href='" +

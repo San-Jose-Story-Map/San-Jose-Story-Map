@@ -20,7 +20,9 @@ body {
   position: fixed;
 }
 /*winner*/
-
+h5{
+  margin: 10px;
+}
 .winner{
   padding: 0px;
   margin: 0px;
@@ -124,7 +126,7 @@ h1 {
   height: 70%;
   overflow: auto;
   padding-bottom: 60px;
-  font-size: .8em;
+  font-size: 1.2em;
 }
 
 .listings .item {
@@ -206,10 +208,12 @@ a.title {
 }
 
 .mapboxgl-popup-content {
-  font: 400 15px/22px 'omnes-pro', Sans-serif;
+  font: 400 16px/22px 'omnes-pro', Sans-serif;
   padding: 0px;
-  width: 300px;
+  width: 400px;
   background-color: rgba(255, 255, 255, 0.85);
+  font-size: 1.5em;
+  left: -70px;
 }
 
 .mapboxgl-popup-content-wrapper {
@@ -217,8 +221,8 @@ a.title {
 }
 
 .mapboxgl-popup-content h3 {
-  font-family: 'Calibri Family', sans-serif;
-  background: rgba(17, 153, 238,0.7);
+  font-family: 'omnes-pro', Sans-serif;
+  background: rgba(17, 153, 238,1);
   color: #fff;
   text-transform: uppercase;
   margin: 0;
@@ -233,7 +237,7 @@ a.title {
 }
 .mapboxgl-popup-content p{
   padding: 10px;
-  height: 130px;
+  height: 200px;
   overflow-x: auto;
   margin: 0px;
 }
@@ -671,6 +675,7 @@ top:80px
     padding: 0px;
     width: 200px;
     background-color: rgba(255, 255, 255, 0.7);
+    left: 0px;
   }
 
   .mapboxgl-popup-content h3 {
@@ -679,7 +684,13 @@ top:80px
 
   .mapboxgl-popup-content p{
     font-size: 15px;
+    height: 100px;
   }
+
+  .mapboxgl-popup-close-button {
+    top:-15px !important;
+  }
+
 
   #artist-name{
     font-size: 15px;
