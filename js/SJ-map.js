@@ -1,36 +1,11 @@
-//for hashtag menu to open upon click
-function hashtagMenu() {
-  var x = document.getElementById("hashtag-labels");
-  if (window.getComputedStyle(x).display === "block") {
-    document.getElementById("hashtag-labels").style.display = "none";
-    // console.log('filter group will be hidden');
-  } else if (window.getComputedStyle(x).display === "none") {
-    document.getElementById("hashtag-labels").style.display = "block";
-  }
-}
-
 //user access code from Mapbox
 mapboxgl.accessToken = 'pk.eyJ1Ijoic2pzdG9yeW1hcCIsImEiOiJjbDFmbW9kdDYwMDZlM2lyMmttdWR2OGs3In0.5Roc_Q0q5dBc-HdWCed3zg';
 var geojsonData;
 var shownLayer = [];
 var indexListing;
+var popUps;
 
-// Store local geojson file into a variable
-$(document).ready(function() {
 
-  $.getJSON('data/sj-story-map-all-2022.geojson', function(results) {
-    // Assign the results to the geojsonData variable
-    geojsonData = results;
-    //for testing
-    // console.log(results);
-    //assign each artist to an ID
-    geojsonData.features.forEach(function(artist, i) {
-      artist.properties.id = i;
-      //for testing
-      // console.log("artistid=" + artist.properties.id);
-    });
-  });
-});
 
 var filterGroup = document.getElementById('filter-group');
 var hashtagLabels = document.createElement('div');
@@ -45,21 +20,29 @@ var map = new mapboxgl.Map({
   center: sanjose
 });
 
+
+// Store local geojson file into a variable
+$(document).ready(function() {
+
+  $.getJSON('data/sj-storymap-no-winners.geojson', function(results) {
+    // Assign the results to the geojsonData variable
+    geojsonData = results;
+    //for testing
+    // console.log(results);
+    //assign each artist to an ID
+    geojsonData.features.forEach(function(artist, i) {
+      artist.properties.id = i;
+      //for testing
+      // console.log("artistid=" + artist.properties.id);
+    });
+  });
+});
 // This will let the .remove() function work later on **come back
-
-if (!('remove' in Element.prototype)) {
-  Element.prototype.remove = function() {
-    if (this.parentNode) {
-      this.parentNode.removeChild(this);
-    }
-  };
-}
-
 //waits for the map to load for other functions to work
 map.on('load', function() {
   //loads the custom markers
 
-
+  map.addControl(new mapboxgl.NavigationControl(), 'top-left');
   map.loadImage(
     'media/sjstory-map-marker-2.png',
     function(error, image) {
@@ -159,7 +142,7 @@ map.on('load', function() {
           'icon-size': 0.15,
           'icon-allow-overlap': true,
           'text-allow-overlap': true,
-          'text-ignore-placement': true,
+          // 'text-ignore-placement': true,
           'icon-ignore-placement': true,
           // get the title name from the source's "title" property
           'text-field': ['get', 'title'],
@@ -196,38 +179,45 @@ map.on('load', function() {
       //else stay normal
       input.addEventListener('change', function(e) {
         currentClickedLayerID = layerID;
-        console.log("Current layer id is: " + currentClickedLayerID + "and target is: " + e.target.id);
+        // console.log("Current layer id is: " + currentClickedLayerID + "and target is: " + e.target.id);
+        if (popUps) {
+          if (popUps[0]) popUps[0].remove();
+        }
 
-              if (hashtagClickedOnce == false) {
-                for (i = 0; i < shownLayer.length; i++) {
-                  if (currentClickedLayerID != shownLayer[i]) {
-                    console.log("shownlayercycle at: " + shownLayer[i]);
-                    map.setLayoutProperty(
-                      shownLayer[i],
-                      'visibility',
-                      'none'
-                    );
+        map.zoomTo(8.6, {
+          duration: 2000,
+          pitch: 0,
+          center: sanjose
+        });
 
-                  }
-                  else {
-                    map.setLayoutProperty(
-                      shownLayer[i],
-                      'visibility',
-                      e.target.checked ? 'visible' : 'none'
-                    );
+        if (hashtagClickedOnce == false) {
+          for (i = 0; i < shownLayer.length; i++) {
+            if (currentClickedLayerID != shownLayer[i]) {
+              console.log("shownlayercycle at: " + shownLayer[i]);
+              map.setLayoutProperty(
+                shownLayer[i],
+                'visibility',
+                'none'
+              );
 
-                  }
-                }
-                hashtagClickedOnce = true;
-                console.log("hashtag clicked is: " + hashtagClickedOnce);
-              }
-              else {
-                map.setLayoutProperty(
-                  layerID,
-                  'visibility',
-                  e.target.checked ? 'visible' : 'none'
-                );
-              }
+            } else {
+              map.setLayoutProperty(
+                shownLayer[i],
+                'visibility',
+                e.target.checked ? 'visible' : 'none'
+              );
+
+            }
+          }
+          hashtagClickedOnce = true;
+          console.log("hashtag clicked is: " + hashtagClickedOnce);
+        } else {
+          map.setLayoutProperty(
+            layerID,
+            'visibility',
+            e.target.checked ? 'visible' : 'none'
+          );
+        }
         // else {
         //   map.setLayoutProperty(
         //     layerID,
@@ -250,6 +240,16 @@ map.on('load', function() {
   // console.log(indexListing);
 });
 
+if (!('remove' in Element.prototype)) {
+  Element.prototype.remove = function() {
+    if (this.parentNode) {
+      this.parentNode.removeChild(this);
+    }
+  };
+}
+
+
+
 
 //current location button
 // map.addControl(
@@ -260,7 +260,16 @@ map.on('load', function() {
 //     trackUserLocation: true
 //   })
 // );
-
+//for hashtag menu to open upon click
+function hashtagMenu() {
+  var x = document.getElementById("hashtag-labels");
+  if (window.getComputedStyle(x).display === "block") {
+    document.getElementById("hashtag-labels").style.display = "none";
+    // console.log('filter group will be hidden');
+  } else if (window.getComputedStyle(x).display === "none") {
+    document.getElementById("hashtag-labels").style.display = "block";
+  }
+}
 // builds the sidebar with geoJSON data
 function buildLocationList(data) {
   data.features.forEach(function(artist, i) {
@@ -285,35 +294,28 @@ function buildLocationList(data) {
     link.className = 'title';
     link.id = "link-" + prop.id;
     //using the title of the piece as header
-    link.innerHTML = '<div><h1 id="'+link.id+'-h1">'+ prop['first name'] +
+    link.innerHTML = '<div><h1 id="' + link.id + '-h1">' + prop['first name'] +
       " " + prop['last name'] + '</h1></div>';
 
-      if (prop["category"]=="poetic")
-      {
+    if (prop["category"] == "poetic") {
 
-          link.innerHTML += "<h5 class = 'category'>Poetic Postcard Participant<h5>"
-
+      link.innerHTML += "<h5 class = 'category'>Poetic Postcard Participant<h5>"
 
 
+
+    } else if (prop["category"] == "wish") {
+
+      link.innerHTML += "<h5 class = 'category'>Wish You Were Here Participant<h5>"
+
+
+    } else if (prop["category"] == "storymap") {
+      if (prop["storymap winner"] == "TRUE") {
+        link.innerHTML += "<h5 class = 'winner' id ='storymap-winner'>San José Story Map Winner<h5>"
+      } else {
+        // link.innerHTML += "<h5 class = 'category'>San José Story Map<h5>"
       }
-      else if (prop["category"]=="wish")
-      {
 
-          link.innerHTML += "<h5 class = 'category'>Wish You Were Here Participant<h5>"
-
-
-      }
-      else if (prop["category"]=="storymap")
-      {
-        if (prop["storymap winner"]=="TRUE")
-        {
-          link.innerHTML += "<h5 class = 'winner' id ='storymap-winner'>San José Story Map Winner<h5>"
-        }
-        else {
-          // link.innerHTML += "<h5 class = 'category'>San José Story Map<h5>"
-        }
-
-      }
+    }
 
     link.innerHTML += prop["title of work"];
 
@@ -354,17 +356,15 @@ function buildLocationList(data) {
       var newLink = currentLink.substring(currentLink.indexOfEnd('id='), currentLink.length);
       // console.log("new link: " + newLink);
 
-      if (prop["photo submission 2"])
-      {
-          var currentLink2 = prop["photo submission 2"];
-          var newLink2 = currentLink2.substring(currentLink2.indexOfEnd('id='), currentLink2.length);
+      if (prop["photo submission 2"]) {
+        var currentLink2 = prop["photo submission 2"];
+        var newLink2 = currentLink2.substring(currentLink2.indexOfEnd('id='), currentLink2.length);
 
-          details.innerHTML += "<br />" + "<img class ='artist-img' src='" + "https://drive.google.com/uc?id=" + newLink +
-            "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>" +"<br />" + "<img class ='artist-img' src='" + "https://drive.google.com/uc?id=" + newLink2 +
-              "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>";
+        details.innerHTML += "<br />" + "<img class ='artist-img' src='" + "https://drive.google.com/uc?id=" + newLink +
+          "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>" + "<br />" + "<img class ='artist-img' src='" + "https://drive.google.com/uc?id=" + newLink2 +
+          "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>";
 
-      }
-      else {
+      } else {
         details.innerHTML += "<br />" + "<img class ='artist-img' src='" + "https://drive.google.com/uc?id=" + newLink +
           "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>";
       }
@@ -378,7 +378,8 @@ function buildLocationList(data) {
       // console.log("current link: " + currentLink);
       var newLink = currentLink.substring(currentLink.lastIndexOf('id='), currentLink.length);
       // console.log("new link: " + newLink);
-details.innerHTML += "<br />" + "<iframe src='" + "https://drive.google.com/uc?export=view&" + newLink + "' width = '600px' webkitallowfullscreen mozallowfullscreen allowfullscreen autoplay='0'> </iframe>"    }
+      details.innerHTML += "<br />" + "<iframe src='" + "https://drive.google.com/uc?export=view&" + newLink + "' width = '600px' webkitallowfullscreen mozallowfullscreen allowfullscreen autoplay='0'> </iframe>"
+    }
 
     if (prop["text submission"]) {
 
@@ -427,7 +428,7 @@ details.innerHTML += "<br />" + "<iframe src='" + "https://drive.google.com/uc?e
       for (var i = 0; i < data.features.length; i++) {
         checkListingLink = "link-" + i;
         visibleListingID = "listing-" + i;
-        if (isElementOnScreen(checkListingLink)&& data.features[i].geometry.coordinates[1]) {
+        if (isElementOnScreen(checkListingLink) && data.features[i].geometry.coordinates[1]) {
           visibleListing = data.features[i];
           //for testing
           // console.log("we are in the onscroll function at index: " + i);
@@ -453,11 +454,9 @@ details.innerHTML += "<br />" + "<iframe src='" + "https://drive.google.com/uc?e
       var bounds = element.getBoundingClientRect();
       //for testing
       // console.log("bounds top: " + bounds.top + " Window inner height:" + window.innerHeight + " Bounds bottom: " + bounds.bottom);
-      if (window.innerWidth < 600)
-      {
-        return bounds.top < window.innerHeight - (window.innerHeight /2);
-      }
-      else{
+      if (window.innerWidth < 600) {
+        return bounds.top < window.innerHeight - (window.innerHeight / 2);
+      } else {
         return bounds.top < window.innerHeight - (window.innerHeight / 3);
       }
 
@@ -528,7 +527,7 @@ function flyToPin(currentFeature) {
 
 //creates popup over the location icon
 function createPopUp(currentFeature) {
-  var popUps = document.getElementsByClassName('mapboxgl-popup');
+  popUps = document.getElementsByClassName('mapboxgl-popup');
   var coorPad = currentFeature.geometry.coordinates;
   var popupContent = "";
 

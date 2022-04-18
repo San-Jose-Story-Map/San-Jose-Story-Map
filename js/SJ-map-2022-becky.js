@@ -4,6 +4,7 @@ var geojsonData;
 var shownLayer = [];
 var indexListing;
 var hashtags = [];
+var popUps;
 const layerIDs = []; // This array will contain a list used to filter against.
 var filterGroup = document.getElementById('filter-group');
 var hashtagLabels = document.createElement('div');
@@ -14,7 +15,7 @@ var sanjose = [-121.8863, 37.3382];
 // Store local geojson file into a variable
 $(document).ready(function() {
 
-  $.getJSON('data/sj-story-map-all-2022-becky.geojson', function(results) {
+  $.getJSON('data/sj-storymap-no-winners.geojson', function(results) {
     // Assign the results to the geojsonData variable
     geojsonData = results;
     //for testing
@@ -33,7 +34,7 @@ $(document).ready(function() {
 var map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/sjstorymap/ckoj67pd4132g17p5drie5i5a', //current color scheme
-  zoom: 10,
+  zoom: 13,
   center: sanjose
 });
 
@@ -49,9 +50,9 @@ if (!('remove' in Element.prototype)) {
 
 //waits for the map to load for other functions to work
 map.on('load', function() {
+
+  map.addControl(new mapboxgl.NavigationControl(), 'top-left');
   //loads the custom markers
-
-
   map.loadImage(
     'media/sjstory-map-marker-2.png',
     function(error, image) {
@@ -82,14 +83,12 @@ map.on('load', function() {
   //adds hashtag popup header
   var filterHeader = document.createElement('H1');
   var headerText = document.createTextNode("HASHTAGS");
-  filterHeader.appendChild(headerText);
-  filterHeader.id = 'hashtag-header-text';
-  filterGroup.appendChild(filterHeader);
-
   var hashtagClickedOnce = false;
   var currentClickedLayerID = "";
 
-
+  filterHeader.appendChild(headerText);
+  filterHeader.id = 'hashtag-header-text';
+  filterGroup.appendChild(filterHeader);
   //grabs all artist data in the geoJSON file and stores them into "feature"
   geojsonData.features.forEach(function(feature) {
 
@@ -115,8 +114,7 @@ map.on('load', function() {
     //creates a layer for each hashtag/filter
     if (!map.getLayer(layerID)) {
 
-      if (  originalHash == beckyHash)
-      {
+      if (originalHash.includes(beckyHash)) {
         map.addLayer({
           'id': layerID,
           'type': 'symbol',
@@ -141,8 +139,7 @@ map.on('load', function() {
           'filter': ['==', 'all hashtags', originalHash]
           //**come back with issue
         });
-      }
-      else {
+      } else {
         map.addLayer({
           'id': layerID,
           'type': 'symbol',
@@ -186,11 +183,9 @@ map.on('load', function() {
             input.type = 'checkbox';
             //target id
             input.id = artistHashtags[i];
-            if (artistHashtags[i] == 'SJResistArt')
-            {
+            if (artistHashtags[i].includes(beckyHash)) {
               input.checked = true;
-            }
-            else {
+            } else {
               input.checked = false;
             }
 
@@ -208,19 +203,27 @@ map.on('load', function() {
 
             input.addEventListener('change', function(e) {
               const value = e.target.id;
+              if (popUps) {
+                if (popUps[0]) popUps[0].remove();
+              }
 
-                //checks if the artist used the hashtag,
-                //makes artist visible if their hashtag is clicked
-                for (const currentlayerID of layerIDs) {
-                  if (currentlayerID.includes(value)) {
-                    //console.log("Current layer id is: " + currentlayerID + " and target is: " + e.target.id + "and is: " + currentlayerID.includes(value));
-                    map.setLayoutProperty(
-                      currentlayerID,
-                      'visibility',
-                      e.target.checked ? 'visible' : 'none'
-                    );
-                  }
+              map.zoomTo(8.6, {
+                duration: 2000,
+                pitch: 0,
+                center: sanjose
+              });
+              //checks if the artist used the hashtag,
+              //makes artist visible if their hashtag is clicked
+              for (const currentlayerID of layerIDs) {
+                if (currentlayerID.includes(value)) {
+                  //console.log("Current layer id is: " + currentlayerID + " and target is: " + e.target.id + "and is: " + currentlayerID.includes(value));
+                  map.setLayoutProperty(
+                    currentlayerID,
+                    'visibility',
+                    e.target.checked ? 'visible' : 'none'
+                  );
                 }
+              }
 
             });
           } else {
@@ -387,14 +390,14 @@ function buildLocationList(data) {
     // } else
     if (prop["category"] == "wish") {
 
-        link.innerHTML += "<h5 class = 'category'>Wish You Were Here Participant<h5>";
+      link.innerHTML += "<h5 class = 'category'>Wish You Were Here Participant<h5>";
 
 
     } else if (prop["category"] == "poetic") {
 
 
-        link.innerHTML += "<h5 class = 'category'>Poetic Postcards Participant<h5>";
-    
+      link.innerHTML += "<h5 class = 'category'>Poetic Postcards Participant<h5>";
+
     }
 
     link.innerHTML += prop["title of work"];
@@ -611,7 +614,7 @@ function flyToPin(currentFeature) {
 
 //creates popup over the location icon
 function createPopUp(currentFeature) {
-  var popUps = document.getElementsByClassName('mapboxgl-popup');
+  popUps = document.getElementsByClassName('mapboxgl-popup');
   var coorPad = currentFeature.geometry.coordinates;
   var popupContent = "";
 

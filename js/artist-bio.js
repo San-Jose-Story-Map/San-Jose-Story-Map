@@ -22,7 +22,7 @@ $(document).ready(function() {
 
 
 
-  $.getJSON('data/sj-story-map-all-2022-winner.geojson', function(results) {
+  $.getJSON('data/sj-storymap-no-winners.geojson', function(results) {
       geojsonData = results;
       geojsonData.features.forEach(function(artist, i) {
           var prop = artist.properties;
