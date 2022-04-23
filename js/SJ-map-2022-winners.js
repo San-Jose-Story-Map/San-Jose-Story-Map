@@ -462,17 +462,20 @@ function buildLocationList(data) {
 
       var newLink = currentLink.substring(currentLink.indexOfEnd('id='), currentLink.length);
       // console.log("new link: " + newLink);
+      var fullLink = "https://drive.google.com/uc?id=" + newLink;
+      // setCookie(prop['last name'], fullLink, 1);
 
       if (prop["photo submission 2"]) {
         var currentLink2 = prop["photo submission 2"];
         var newLink2 = currentLink2.substring(currentLink2.indexOfEnd('id='), currentLink2.length);
-
-        details.innerHTML += "<br />" + "<img class ='artist-img' src='" + "https://drive.google.com/uc?id=" + newLink +
-          "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>" + "<br />" + "<img class ='artist-img' src='" + "https://drive.google.com/uc?id=" + newLink2 +
+        var fullLink2 = "https://drive.google.com/uc?id=" + newLink2;
+        // setCookie(prop['last name']+"1", fullLink2, 1);
+        details.innerHTML += "<br />" + "<img class ='artist-img' src='" + fullLink +
+          "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>" + "<br />" + "<img class ='artist-img' src='" + fullLink2 +
           "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>";
 
       } else {
-        details.innerHTML += "<br />" + "<img class ='artist-img' src='" + "https://drive.google.com/uc?id=" + newLink +
+        details.innerHTML += "<br />" + "<img class ='artist-img' src='" + fullLink +
           "'/><div id='myModal' class='modal'><span class = 'close'>X</span><img class='modal-content' id='img01'><div id ='caption'></div></div>";
       }
 
@@ -485,7 +488,9 @@ function buildLocationList(data) {
       // console.log("current link: " + currentLink);
       var newLink = currentLink.substring(currentLink.lastIndexOf('id='), currentLink.length);
       // console.log("new link: " + newLink);
-      details.innerHTML += "<br />" + "<iframe src='" + "https://drive.google.com/uc?export=view&" + newLink + "' width = '600px' webkitallowfullscreen mozallowfullscreen allowfullscreen autoplay='0'> </iframe>"
+      var fullLink = "https://drive.google.com/uc?export=view&" + newLink;
+      // setCookie(prop['last name']+"1", fullLink, 1);
+      details.innerHTML += "<br />" + "<iframe src='" + fullLink+ "' width = '600px' webkitallowfullscreen mozallowfullscreen allowfullscreen autoplay='0'> </iframe>"
     }
 
     if (prop["text submission"]) {
@@ -611,7 +616,15 @@ function updateTilt() {
 
   }
 }
-
+// function setCookie(cname, cvalue, exdays) {
+//   const d = new Date();
+//   let domainVal = ".google.com";
+//   d.setTime(d.getTime() + (exdays*24*60*60*1000));
+//   let expires = "expires="+ d.toUTCString();
+//   let domain = "Domain'" + domainVal;
+//   let ss = "SameSite=none";
+//   document.cookie = cname + "=" + cvalue + ";" + expires +";"+ domain + ";" + ss + "; Secure";
+// }
 //allows the map to move depending on click/scroll
 function flyToPin(currentFeature) {
   var latitude = currentFeature.geometry.coordinates[1];
