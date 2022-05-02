@@ -490,7 +490,10 @@ function buildLocationList(data) {
       // console.log("new link: " + newLink);
       var fullLink = "https://drive.google.com/uc?export=view&" + newLink;
       // setCookie(prop['last name']+"1", fullLink, 1);
-      details.innerHTML += "<br />" + "<iframe src='" + fullLink+ "' width = '600px' webkitallowfullscreen mozallowfullscreen allowfullscreen autoplay='0'> </iframe>"
+      // details.innerHTML += "<br />" + "<iframe src='" + fullLink+ "' width = '600px' webkitallowfullscreen mozallowfullscreen allowfullscreen autoplay='0'> </iframe>"
+
+      details.innerHTML += "<br />" + "<video width='600px' controls> <source src='" + fullLink + "' type='video/mp4'></video>";
+
     }
 
     if (prop["text submission"]) {
