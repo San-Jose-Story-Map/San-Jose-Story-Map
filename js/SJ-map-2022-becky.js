@@ -15,7 +15,7 @@ var sanjose = [-121.8863, 37.3382];
 // Store local geojson file into a variable
 $(document).ready(function() {
 
-  $.getJSON('data/sj-storymap-no-winners.geojson', function(results) {
+  $.getJSON('data/sj-storymap-winners-updated.geojson', function(results) {
     // Assign the results to the geojsonData variable
     geojsonData = results;
     //for testing
